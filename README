@@ -1,0 +1,56 @@
+File::      <tt>README</tt> 
+Author::    Sebastien Varrette (Sebastien.Varrette@uni.lu)
+Copyright:: Copyright (c) 2011 Sebastien Varrette
+License::   GPLv3
+
+Time-stamp: <Mon 2011-08-15 00:44 svarrette>
+
+------------------------------------------------------------------------------
+
+= MODULE
+
+bash 
+
+= DESCRIPTION
+
+This is the bash module.
+Configure and manage bash
+
+== Supported Platforms
+
+* Debian
+* Redhat and others: not  tested yet)
+
+== Main classes
+
+* bash($arg) :: Install and configure bash
+
+== Sample Usage
+
+     import bash
+     [...]
+     class { 'bash':
+           arg => 'val'
+     }
+
+= Author/Licence
+
+The bash module is 
+Copyright (c) 2011 Sebastien Varrette[mailto:Sebastien.Varrette@uni.lu]. 
+
+It is a free software: you can redistribute it and/or modify it under the terms
+of the GNU General Public License as published by the Free Software Foundation,
+either version 3 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but WITHOUT ANY
+WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+PARTICULAR PURPOSE.  See the GNU General Public License for more details. 
+You should have received a copy of the GNU General Public License along with
+this program.  If not, see <http://www.gnu.org/licenses/>.  
+
+= Resources
+
+The design of this module is inspired by the following conributions: 
+* item1
+
+
