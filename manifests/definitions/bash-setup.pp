@@ -56,6 +56,10 @@ define bash::setup (
         default => "${homedir}"
     }
 
+    # Let's go
+    info("configuring bash in ${basedir} for user ${user} (with ensure = ${ensure})")
+
+    
     # clone my personnal configuration from github
     git::clone { "${basedir}/${bash::params::dotfilesdir}":
         basedir   => "${basedir}",
