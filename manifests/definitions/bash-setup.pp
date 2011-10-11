@@ -179,6 +179,8 @@ define bash::setup (
                         Git::Clone["${basedir}/${bash::params::dotfilesdir}"],
                         Exec["mv ${basedir}/.bashrc ${basedir}/.bashrc.old"]
                         ],
+            owner   => "${user}",
+            group   => "${group}",
             replace => false,
         }
 
@@ -189,6 +191,8 @@ define bash::setup (
                         Git::Clone["${basedir}/${bash::params::dotfilesdir}"],
                         Exec["mv ${basedir}/.inputrc ${basedir}/.inputrc.old"]
                         ],
+            owner   => "${user}",
+            group   => "${group}",
             replace => false,
         }
         file { "${basedir}/.vimrc":
@@ -198,6 +202,8 @@ define bash::setup (
                         Git::Clone["${basedir}/${bash::params::dotfilesdir}"],
                         Exec["mv ${basedir}/.vimrc ${basedir}/.vimrc.old"]
                         ],
+            owner   => "${user}",
+            group   => "${group}",
             replace => false,
         }
         file { "${basedir}/.gitconfig":
@@ -207,9 +213,19 @@ define bash::setup (
                         Git::Clone["${basedir}/${bash::params::dotfilesdir}"],
                         Exec["mv ${basedir}/.gitconfig ${basedir}/.gitconfig.old"]
                         ],
+            owner   => "${user}",
+            group   => "${group}",
             replace => false,
         }
-
+        # # Add a ~/.bash_logout
+        file { "${basedir}/.bash_logout":
+            ensure  => 'file',
+            replace => false,
+            source  => "puppet:///modules/bash/bash_logout",            
+            owner   => "${user}",
+            group   => "${group}",
+            mode    => '0644',
+        }
 
     }
 
