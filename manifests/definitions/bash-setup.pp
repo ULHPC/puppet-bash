@@ -67,7 +67,8 @@ define bash::setup (
         source    => "${bash::params::dotfiles_gitsrc}",
         ensure    => "${ensure}",
         user      => "${user}",
-        group     => "${group}"
+        group     => "${group}",
+        timeout   => 15,
     }
 
 
