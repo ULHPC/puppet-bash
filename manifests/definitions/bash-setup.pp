@@ -107,6 +107,14 @@ define bash::setup (
             unless  => "test -f ${basedir}/.bashrc",
             require => Exec["rm -f ${basedir}/.bashrc"]
         }
+        exec { "mv ${basedir}/.bash_profile.old ${basedir}/.bash_profile":
+            path    => "/usr/bin:/usr/sbin:/bin",
+            creates => "${basedir}/.bash_profile",
+            user    => "${user}",
+            group   => "${group}",
+            onlyif  => "test -f ${basedir}/.bash_profile.old",
+            unless  => "test -f ${basedir}/.bash_profile",
+        }
         exec { "mv ${basedir}/.inputrc.old ${basedir}/.inputrc":
             path    => "/usr/bin:/usr/sbin:/bin",
             creates => "${basedir}/.inputrc",
@@ -146,6 +154,13 @@ define bash::setup (
             group   => "${group}",
             onlyif  => "test -f ${basedir}/.bashrc",
             unless  => "test -h ${basedir}/.bashrc",
+        }
+        exec { "mv ${basedir}/.bash_profile ${basedir}/.bash_profile.old":
+            path    => "/usr/bin:/usr/sbin:/bin",
+            creates => "${basedir}/.bash_profile.old",
+            user    => "${user}",
+            group   => "${group}",
+            onlyif  => "test -f ${basedir}/.bash_profile",
         }
         exec { "mv ${basedir}/.inputrc ${basedir}/.inputrc.old":
             path    => "/usr/bin:/usr/sbin:/bin",
