@@ -197,7 +197,7 @@ define bash::setup (
                         ],
             owner   => "${user}",
             group   => "${group}",
-            replace => false,
+            replace => true,
         }
 
         file { "${basedir}/.inputrc":
@@ -209,7 +209,7 @@ define bash::setup (
                         ],
             owner   => "${user}",
             group   => "${group}",
-            replace => false,
+            replace => true,
         }
         file { "${basedir}/.vimrc":
             ensure  => 'link',
@@ -220,7 +220,7 @@ define bash::setup (
                         ],
             owner   => "${user}",
             group   => "${group}",
-            replace => false,
+            replace => true,
         }
         file { "${basedir}/.gitconfig":
             ensure  => 'link',
@@ -231,7 +231,7 @@ define bash::setup (
                         ],
             owner   => "${user}",
             group   => "${group}",
-            replace => false,
+            replace => true,
         }
         # # Add a ~/.bash_logout
         file { "${basedir}/.bash_logout":
