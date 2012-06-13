@@ -16,8 +16,8 @@
 #
 # Configure the .bashrc etc. into a given homedir using my personnal
 # configuration (see https://github.com/Falkor/dotfiles).
-# Actually, it not only creates the symlinks for .bashrc, .inputrc but also for 
-# .vimrc and .gitconfig that are provided as part of my config. 
+# Actually, it not only creates the symlinks for .bashrc, .inputrc but also for
+# .vimrc and .gitconfig that are provided as part of my config.
 #
 # In all case, a backup of the existing files is done (if they exist) via a
 # renaming to <filename>.old
@@ -59,16 +59,17 @@ define bash::setup (
     # Let's go
     info("configuring bash in ${basedir} for user ${user} (with ensure = ${ensure})")
 
-    
+
     # clone my personnal configuration from github
-    git::clone { "${basedir}/${bash::params::dotfilesdir}":
-        basedir   => "${basedir}",
-        targetdir => "${bash::params::dotfilesdir}",
-        source    => "${bash::params::dotfiles_gitsrc}",
-        ensure    => "${ensure}",
-        user      => "${user}",
-        group     => "${group}",
-        timeout   => 15,
+    if ! defined( Git::Clone["${bash::params::dotfilesdir}"] ) {
+        git::clone { "${bash::params::dotfilesdir}":
+            basedir   => "${basedir}",
+            source    => "${bash::params::dotfiles_gitsrc}",
+            ensure    => "${ensure}",
+            user      => "${user}",
+            group     => "${group}",
+            timeout   => 15,
+        }
     }
 
 
@@ -192,7 +193,7 @@ define bash::setup (
             ensure  => 'link',
             target  => "${basedir}/${bash::params::dotfilesdir}/bash/.bashrc",
             require => [
-                        Git::Clone["${basedir}/${bash::params::dotfilesdir}"],
+                        Git::Clone["${bash::params::dotfilesdir}"],
                         Exec["mv ${basedir}/.bashrc ${basedir}/.bashrc.old"]
                         ],
             owner   => "${user}",
@@ -204,7 +205,7 @@ define bash::setup (
             ensure  => 'link',
             target  => "${basedir}/${bash::params::dotfilesdir}/bash/.inputrc",
             require => [
-                        Git::Clone["${basedir}/${bash::params::dotfilesdir}"],
+                        Git::Clone["${bash::params::dotfilesdir}"],
                         Exec["mv ${basedir}/.inputrc ${basedir}/.inputrc.old"]
                         ],
             owner   => "${user}",
@@ -215,7 +216,7 @@ define bash::setup (
             ensure  => 'link',
             target  => "${basedir}/${bash::params::dotfilesdir}/vim/.vimrc",
             require => [
-                        Git::Clone["${basedir}/${bash::params::dotfilesdir}"],
+                        Git::Clone["${bash::params::dotfilesdir}"],
                         Exec["mv ${basedir}/.vimrc ${basedir}/.vimrc.old"]
                         ],
             owner   => "${user}",
@@ -226,7 +227,7 @@ define bash::setup (
             ensure  => 'link',
             target  => "${basedir}/${bash::params::dotfilesdir}/git/.gitconfig",
             require => [
-                        Git::Clone["${basedir}/${bash::params::dotfilesdir}"],
+                        Git::Clone["${bash::params::dotfilesdir}"],
                         Exec["mv ${basedir}/.gitconfig ${basedir}/.gitconfig.old"]
                         ],
             owner   => "${user}",
@@ -237,7 +238,7 @@ define bash::setup (
         file { "${basedir}/.bash_logout":
             ensure  => 'file',
             replace => false,
-            source  => "puppet:///modules/bash/bash_logout",            
+            source  => "puppet:///modules/bash/bash_logout",
             owner   => "${user}",
             group   => "${group}",
             mode    => '0644',
