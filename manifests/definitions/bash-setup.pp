@@ -61,9 +61,9 @@ define bash::setup (
 
 
     # clone my personnal configuration from github
-    if ! defined( Git::Clone["${bash::params::dotfilesdir}"] ) {
-        git::clone { "${bash::params::dotfilesdir}":
-            basedir   => "${basedir}",
+    if ! defined( Git::Clone["${basedir}/${bash::params::dotfilesdir}"] ) {
+        git::clone { "${basedir}/${bash::params::dotfilesdir}":
+            path      => "${basedir}/${bash::params::dotfilesdir}",
             source    => "${bash::params::dotfiles_gitsrc}",
             ensure    => "${ensure}",
             user      => "${user}",
@@ -193,7 +193,7 @@ define bash::setup (
             ensure  => 'link',
             target  => "${basedir}/${bash::params::dotfilesdir}/bash/.bashrc",
             require => [
-                        Git::Clone["${bash::params::dotfilesdir}"],
+                        Git::Clone["${basedir}/${bash::params::dotfilesdir}"],
                         Exec["mv ${basedir}/.bashrc ${basedir}/.bashrc.old"]
                         ],
             owner   => "${user}",
@@ -205,7 +205,7 @@ define bash::setup (
             ensure  => 'link',
             target  => "${basedir}/${bash::params::dotfilesdir}/bash/.inputrc",
             require => [
-                        Git::Clone["${bash::params::dotfilesdir}"],
+                        Git::Clone["${basedir}/${bash::params::dotfilesdir}"],
                         Exec["mv ${basedir}/.inputrc ${basedir}/.inputrc.old"]
                         ],
             owner   => "${user}",
@@ -216,7 +216,7 @@ define bash::setup (
             ensure  => 'link',
             target  => "${basedir}/${bash::params::dotfilesdir}/vim/.vimrc",
             require => [
-                        Git::Clone["${bash::params::dotfilesdir}"],
+                        Git::Clone["${basedir}/${bash::params::dotfilesdir}"],
                         Exec["mv ${basedir}/.vimrc ${basedir}/.vimrc.old"]
                         ],
             owner   => "${user}",
@@ -227,7 +227,7 @@ define bash::setup (
             ensure  => 'link',
             target  => "${basedir}/${bash::params::dotfilesdir}/git/.gitconfig",
             require => [
-                        Git::Clone["${bash::params::dotfilesdir}"],
+                        Git::Clone["${basedir}/${bash::params::dotfilesdir}"],
                         Exec["mv ${basedir}/.gitconfig ${basedir}/.gitconfig.old"]
                         ],
             owner   => "${user}",
