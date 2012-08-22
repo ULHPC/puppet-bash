@@ -3,7 +3,7 @@
 # Copyright:: Copyright (c) 2011 Sebastien Varrette
 # License::   GPLv3
 #
-# Time-stamp: <Wed 2011-08-31 13:05 svarrette>
+# Time-stamp: <Wed 2012-08-22 15:15 svarrette>
 # ------------------------------------------------------------------------------
 # = Class: bash
 #
@@ -57,6 +57,26 @@ class bash::common {
     package { $bash::params::packages:
         ensure  => installed,
     }
+
+    # # Clone the bash-completion
+    
+    
+    # git::clone { "bash-completion":
+    #     basedir => "/usr/local/src",
+    #     source  => "${bash::params::bash_completion_giturl}",
+    #     timeout => 15
+    # }
+
+    
+    
+    
+    # # # Add the puppet completion script available on the system
+    # # file { "${bash::params::bash_completion_dir}/puppet":
+    # #     ensure => 'file',
+    # #     source => "puppet:///modules/bash/bash_completion.d/puppet"        
+    # # }
+    
+
     
 }
 
@@ -65,7 +85,9 @@ class bash::common {
 # = Class: bash::debian
 #
 # Specialization class for Debian systems
-class bash::debian inherits bash::common { }
+class bash::debian inherits bash::common {
+
+}
 
 # ------------------------------------------------------------------------------
 # = Class: bash::redhat

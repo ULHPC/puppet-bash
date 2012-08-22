@@ -3,7 +3,7 @@
 # Copyright:: Copyright (c) 2011 Sebastien Varrette
 # License::   GPLv3
 #
-# Time-stamp: <Wed 2011-08-31 13:18 svarrette>
+# Time-stamp: <Wed 2012-08-22 15:14 svarrette>
 # ------------------------------------------------------------------------------
 # = Class: bash::params
 #
@@ -37,8 +37,6 @@ class bash::params {
     }
     
 
-    
-
     #### MODULE INTERNAL VARIABLES  #########
     # (Modify to adapt to unsupported OSes)
     #######################################
@@ -47,6 +45,16 @@ class bash::params {
     }
 
     $dotfilesdir = '.dotfiles.d'
+
+    
+    $bash_completion_giturl = "git://github.com/GArik/bash-completion.git"
+    $bash_completion_src_url = "http://bash-completion.alioth.debian.org/files/bash-completion-2.0.tar.gz"
+    $bash_completion_src_version = "2.0" 
+
+    $bash_completion_dir = $::operatingsystem ? {
+        default => '/etc/bash_completion.d'
+    } 
+
     
     # 
     $dotfiles_gitsrc = 'git://github.com/Falkor/dotfiles.git'
