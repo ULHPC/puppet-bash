@@ -3,7 +3,7 @@
 # Copyright:: Copyright (c) 2011 Sebastien Varrette
 # License::   GPLv3
 #
-# Time-stamp: <Wed 2012-08-22 15:14 svarrette>
+# Time-stamp: <Fri 2012-09-07 09:42 svarrette>
 # ------------------------------------------------------------------------------
 # = Class: bash::params
 #
@@ -47,7 +47,7 @@ class bash::params {
     $dotfilesdir = '.dotfiles.d'
 
     
-    $bash_completion_giturl = "git://github.com/GArik/bash-completion.git"
+    $bash_completion_giturl = "https://github.com/GArik/bash-completion.git"
     $bash_completion_src_url = "http://bash-completion.alioth.debian.org/files/bash-completion-2.0.tar.gz"
     $bash_completion_src_version = "2.0" 
 
@@ -57,7 +57,7 @@ class bash::params {
 
     
     # 
-    $dotfiles_gitsrc = 'git://github.com/Falkor/dotfiles.git'
+    $dotfiles_gitsrc = 'https://github.com/Falkor/dotfiles.git'
     
 }
 
