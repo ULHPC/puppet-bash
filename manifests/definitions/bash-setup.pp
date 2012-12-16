@@ -108,14 +108,6 @@ define bash::setup (
             unless  => "test -f ${basedir}/.bashrc",
             require => Exec["rm -f ${basedir}/.bashrc"]
         }
-        exec { "mv ${basedir}/.bash_profile.old ${basedir}/.bash_profile":
-            path    => "/usr/bin:/usr/sbin:/bin",
-            creates => "${basedir}/.bash_profile",
-            user    => "${user}",
-            group   => "${group}",
-            onlyif  => "test -f ${basedir}/.bash_profile.old",
-            unless  => "test -f ${basedir}/.bash_profile",
-        }
         exec { "mv ${basedir}/.inputrc.old ${basedir}/.inputrc":
             path    => "/usr/bin:/usr/sbin:/bin",
             creates => "${basedir}/.inputrc",
@@ -142,6 +134,13 @@ define bash::setup (
             onlyif  => "test -f ${basedir}/.gitconfig.old",
             unless  => "test -f ${basedir}/.gitconfig",
             require => Exec["rm -f ${basedir}/.gitconfig"]
+        }
+        exec { "mv -f ${basedir}/.bash_profile.old ${basedir}/.bash_profile":
+            path    => "/usr/bin:/usr/sbin:/bin",
+            creates => "${basedir}/.bash_profile",
+            user    => "${user}",
+            group   => "${group}",
+            onlyif  => "test -f ${basedir}/.bash_profile.old",
         }
 
     }
@@ -234,7 +233,7 @@ define bash::setup (
             group   => "${group}",
             replace => true,
         }
-        # # Add a ~/.bash_logout
+        # Add a ~/.bash_logout
         file { "${basedir}/.bash_logout":
             ensure  => 'file',
             replace => false,
@@ -243,11 +242,19 @@ define bash::setup (
             group   => "${group}",
             mode    => '0644',
         }
+        # Add a ~/.bash_profile
+        if ( $operatingsystem =~ /(?i-mx:centos|fedora|redhat)/ ) {
+            file { "${basedir}/.bash_profile":
+                ensure  => 'file',
+                source  => "puppet:///modules/bash/bash_profile",
+                require => Exec["mv ${basedir}/.bash_profile ${basedir}/.bash_profile.old"],
+                owner   => "${user}",
+                group   => "${group}",
+                mode    => '0644',
+            }
+        }
 
     }
 
-
-
 }
-
 
