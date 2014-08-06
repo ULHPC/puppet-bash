@@ -35,7 +35,7 @@ class bash::params {
         ''      => 'present',
         default => "${augeas_version}",
     }
-    
+
 
     #### MODULE INTERNAL VARIABLES  #########
     # (Modify to adapt to unsupported OSes)
@@ -45,19 +45,20 @@ class bash::params {
     }
 
     $dotfilesdir = '.dotfiles.d'
+    $profiledir = '/etc/profile.d/'
 
-    
+
     $bash_completion_giturl = "https://github.com/GArik/bash-completion.git"
     $bash_completion_src_url = "http://bash-completion.alioth.debian.org/files/bash-completion-2.0.tar.gz"
-    $bash_completion_src_version = "2.0" 
+    $bash_completion_src_version = "2.0"
 
     $bash_completion_dir = $::operatingsystem ? {
         default => '/etc/bash_completion.d'
-    } 
+    }
 
-    
-    # 
+
+    #
     $dotfiles_gitsrc = 'https://github.com/Falkor/dotfiles.git'
-    
+
 }
 
