@@ -1,0 +1,30 @@
+{
+  "name": "ULHPC/bash",
+  "version": "0.0.1",
+  "author": "S. Varrette, H. Cartiaux, V. Plugaru, S. Diehl aka. UL HPC Management Team",
+  "mail": "hpc-sysadmins@uni.lu",
+  "summary": "Configure and manage bash dotfiles and profiles",
+  "description": "Configure and manage bash dotfiles and profiles",
+  "license": "Apache-2.0",
+  "source": "https://github.com/ULHPC/puppet-bash",
+  "docs_project": "ulhpc-puppet-bash",
+  "project_page": "https://github.com/ULHPC/puppet-bash",
+  "issues_url": "https://github.com/ULHPC/puppet-bash/issues",
+  "forge_url": "https://forge.puppetlabs.com/ULHPC/bash",
+  "dependencies": [
+    {
+      "name": "puppetlabs-stdlib",
+      "version_requirement": ">=4.2.2 <5.0.0"
+    }
+  ],
+  "operatingsystem_support": [
+    {
+      "operatingsystem": "Debian",
+      "operatingsystemrelease": [
+        "6",
+        "7"
+      ]
+    }
+  ],
+  "tags": ["shell", "gnu", "bash"]
+}
