@@ -3,3 +3,4 @@
 /.bundle/*
 .falkor*
 /pkg/*
+resources/*
