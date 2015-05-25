@@ -103,15 +103,15 @@ class bash::params {
     $configdir_group = $::operatingsystem ? {
         default => 'root',
     }
-    
+
     $configfile = $::osfamily ? {
         'Redhat' => '/etc/bashrc',
         default  => '/etc/bash.bashrc'
     }
     # Aliases files -- eventually user defined
-    $aliases_file = $bash_aliases_file ? {
+    $aliases_file = $::bash_aliases_file ? {
         ''      => "${profile_dir}/bash_aliases.sh",
-        default => $bash_aliases_file
+        default => $::bash_aliases_file
     }
 
     $configfile_mode = $::operatingsystem ? {

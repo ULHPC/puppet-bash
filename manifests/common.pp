@@ -16,8 +16,8 @@ class bash::common {
     require bash::params
 
     package { 'bash':
-        name   => $bash::params::packagename,
         ensure => 'present',   # You shall NEVER remove the bash package
+        name   => $bash::params::packagename,
     }
 
     package { $bash::params::extra_packages:
@@ -44,14 +44,10 @@ class bash::common {
         content => template("${module_name}/bash_aliases.sh.erb"),
     }
 
-    file {
-        [
-         $bash::params::profile_dir,
-         $bash::params::skel_dir
-         ]:
-             ensure  => 'directory',
-             mode    => $bash::params::configdir_mode,
-             require => Package['bash'],
+    file {  [ $bash::params::profile_dir, $bash::params::skel_dir ]:
+        ensure  => 'directory',
+        mode    => $bash::params::configdir_mode,
+        require => Package['bash'],
     }
 
     file { $bash::params::completion_dir:
@@ -78,4 +74,3 @@ class bash::common {
         group  => $bash::params::configdir_group,
     }
 }
-
