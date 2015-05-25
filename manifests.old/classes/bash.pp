@@ -32,13 +32,13 @@
 #
 class bash inherits bash::params
 {
-    info ("Configuring bash")
+    info ('Configuring bash')
 
     case $::operatingsystem {
         debian, ubuntu:         { include bash::debian }
         redhat, fedora, centos: { include bash::redhat }
         default: {
-            fail("Module $module_name is not supported on $operatingsystem")
+            fail("Module ${module_name} is not supported on ${operatingsystem}")
         }
     }
 }
@@ -95,9 +95,9 @@ class bash::debian inherits bash::common {
 # Specialization class for Redhat systems
 class bash::redhat inherits bash::common {
     file { "${bash::params::profiledir}/git-prompt.sh":
-        ensure  => 'file',
-        source  => "puppet:///modules/bash/git-prompt.sh",
-        mode    => '0644',
+        ensure => 'file',
+        source => 'puppet:///modules/bash/git-prompt.sh',
+        mode   => '0644',
     }
 }
 

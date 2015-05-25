@@ -6,7 +6,7 @@
 # Time-stamp: <Wed 2011-08-31 13:36 svarrette>
 # ------------------------------------------------------------------------------
 
-import "classes/*.pp"
-import "definitions/*.pp"
+import 'classes/*.pp'
+import 'definitions/*.pp'
 
 

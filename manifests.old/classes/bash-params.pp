@@ -33,7 +33,7 @@ class bash::params {
     # Specify the directory in which the .bashrc should be setup.
      $version = $augeas_version ? {
         ''      => 'present',
-        default => "${augeas_version}",
+        default => $augeas_version,
     }
 
 
@@ -48,9 +48,9 @@ class bash::params {
     $profiledir = '/etc/profile.d/'
 
 
-    $bash_completion_giturl = "https://github.com/GArik/bash-completion.git"
-    $bash_completion_src_url = "http://bash-completion.alioth.debian.org/files/bash-completion-2.0.tar.gz"
-    $bash_completion_src_version = "2.0"
+    $bash_completion_giturl = 'https://github.com/GArik/bash-completion.git'
+    $bash_completion_src_url = 'http://bash-completion.alioth.debian.org/files/bash-completion-2.0.tar.gz'
+    $bash_completion_src_version = '2.0'
 
     $bash_completion_dir = $::operatingsystem ? {
         default => '/etc/bash_completion.d'

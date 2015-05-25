@@ -52,8 +52,8 @@ define bash::setup (
 
     # Where to install .bashrc etc.
     $basedir = $homedir ? {
-        ''      => "${name}",
-        default => "${homedir}"
+        ''      => $name,
+        default => $homedir
     }
 
     # Let's go
@@ -63,12 +63,12 @@ define bash::setup (
     # clone my personnal configuration from github
     if ! defined( Git::Clone["${basedir}/${bash::params::dotfilesdir}"] ) {
         git::clone { "${basedir}/${bash::params::dotfilesdir}":
-            path      => "${basedir}/${bash::params::dotfilesdir}",
-            source    => "${bash::params::dotfiles_gitsrc}",
-            ensure    => "${ensure}",
-            user      => "${user}",
-            group     => "${group}",
-            timeout   => 15,
+            path    => "${basedir}/${bash::params::dotfilesdir}",
+            source  => $bash::params::dotfiles_gitsrc,
+            ensure  => $ensure,
+            user    => $user,
+            group   => $group,
+            timeout => 15,
         }
     }
 
@@ -78,68 +78,68 @@ define bash::setup (
         #obliged to split in an if..else as otherwise, file owner is checked even on 'absent'
         # remove installed components
         exec { "rm -f ${basedir}/.bashrc":
-            path    => "/usr/bin:/usr/sbin:/bin",
+            path    => '/usr/bin:/usr/sbin:/bin',
             command => "rm -f ${basedir}/.bashrc",
             onlyif  => "test -h ${basedir}/.bashrc"
         }
         exec { "rm -f ${basedir}/.inputrc":
-            path    => "/usr/bin:/usr/sbin:/bin",
+            path    => '/usr/bin:/usr/sbin:/bin',
             command => "rm -f ${basedir}/.inputrc",
             onlyif  => "test -h ${basedir}/.inputrc"
         }
         exec { "rm -f ${basedir}/.vimrc":
-            path    => "/usr/bin:/usr/sbin:/bin",
+            path    => '/usr/bin:/usr/sbin:/bin',
             command => "rm -f ${basedir}/.vimrc",
             onlyif  => "test -h ${basedir}/.vimrc"
         }
         exec { "rm -f ${basedir}/.gitconfig":
-            path    => "/usr/bin:/usr/sbin:/bin",
+            path    => '/usr/bin:/usr/sbin:/bin',
             command => "rm -f ${basedir}/.gitconfig",
             onlyif  => "test -h ${basedir}/.gitconfig"
         }
 
         # Restore old versions (if they exist)
         exec { "mv ${basedir}/.bashrc.old ${basedir}/.bashrc":
-            path    => "/usr/bin:/usr/sbin:/bin",
+            path    => '/usr/bin:/usr/sbin:/bin',
             creates => "${basedir}/.bashrc",
-            user    => "${user}",
-            group   => "${group}",
+            user    => $user,
+            group   => $group,
             onlyif  => "test -f ${basedir}/.bashrc.old",
             unless  => "test -f ${basedir}/.bashrc",
             require => Exec["rm -f ${basedir}/.bashrc"]
         }
         exec { "mv ${basedir}/.inputrc.old ${basedir}/.inputrc":
-            path    => "/usr/bin:/usr/sbin:/bin",
+            path    => '/usr/bin:/usr/sbin:/bin',
             creates => "${basedir}/.inputrc",
-            user    => "${user}",
-            group   => "${group}",
+            user    => $user,
+            group   => $group,
             onlyif  => "test -f ${basedir}/.inputrc.old",
             unless  => "test -f ${basedir}/.inputrc",
             require => Exec["rm -f ${basedir}/.inputrc"]
         }
         exec { "mv ${basedir}/.vimrc.old ${basedir}/.vimrc":
-            path    => "/usr/bin:/usr/sbin:/bin",
+            path    => '/usr/bin:/usr/sbin:/bin',
             creates => "${basedir}/.vimrc",
-            user    => "${user}",
-            group   => "${group}",
+            user    => $user,
+            group   => $group,
             onlyif  => "test -f ${basedir}/.vimrc.old",
             unless  => "test -f ${basedir}/.vimrc",
             require => Exec["rm -f ${basedir}/.vimrc"]
         }
         exec { "mv ${basedir}/.gitconfig.old ${basedir}/.gitconfig":
-            path    => "/usr/bin:/usr/sbin:/bin",
+            path    => '/usr/bin:/usr/sbin:/bin',
             creates => "${basedir}/.gitconfig",
-            user    => "${user}",
-            group   => "${group}",
+            user    => $user,
+            group   => $group,
             onlyif  => "test -f ${basedir}/.gitconfig.old",
             unless  => "test -f ${basedir}/.gitconfig",
             require => Exec["rm -f ${basedir}/.gitconfig"]
         }
         exec { "mv -f ${basedir}/.bash_profile.old ${basedir}/.bash_profile":
-            path    => "/usr/bin:/usr/sbin:/bin",
+            path    => '/usr/bin:/usr/sbin:/bin',
             creates => "${basedir}/.bash_profile",
-            user    => "${user}",
-            group   => "${group}",
+            user    => $user,
+            group   => $group,
             onlyif  => "test -f ${basedir}/.bash_profile.old",
         }
 
@@ -148,41 +148,41 @@ define bash::setup (
     {
         # eventually backup old version
         exec { "mv ${basedir}/.bashrc ${basedir}/.bashrc.old":
-            path    => "/usr/bin:/usr/sbin:/bin",
+            path    => '/usr/bin:/usr/sbin:/bin',
             creates => "${basedir}/.bashrc.old",
-            user    => "${user}",
-            group   => "${group}",
+            user    => $user,
+            group   => $group,
             onlyif  => "test -f ${basedir}/.bashrc",
             unless  => "test -h ${basedir}/.bashrc",
         }
         exec { "mv ${basedir}/.bash_profile ${basedir}/.bash_profile.old":
-            path    => "/usr/bin:/usr/sbin:/bin",
+            path    => '/usr/bin:/usr/sbin:/bin',
             creates => "${basedir}/.bash_profile.old",
-            user    => "${user}",
-            group   => "${group}",
+            user    => $user,
+            group   => $group,
             onlyif  => "test -f ${basedir}/.bash_profile",
         }
         exec { "mv ${basedir}/.inputrc ${basedir}/.inputrc.old":
-            path    => "/usr/bin:/usr/sbin:/bin",
+            path    => '/usr/bin:/usr/sbin:/bin',
             creates => "${basedir}/.inputrc.old",
-            user    => "${user}",
-            group   => "${group}",
+            user    => $user,
+            group   => $group,
             onlyif  => "test -f ${basedir}/.inputrc",
             unless  => "test -h ${basedir}/.inputrc",
         }
         exec { "mv ${basedir}/.vimrc ${basedir}/.vimrc.old":
-            path    => "/usr/bin:/usr/sbin:/bin",
+            path    => '/usr/bin:/usr/sbin:/bin',
             creates => "${basedir}/.vimrc.old",
-            user    => "${user}",
-            group   => "${group}",
+            user    => $user,
+            group   => $group,
             onlyif  => "test -f ${basedir}/.vimrc",
             unless  => "test -h ${basedir}/.vimrc",
         }
         exec { "mv ${basedir}/.gitconfig ${basedir}/.gitconfig.old":
-            path    => "/usr/bin:/usr/sbin:/bin",
+            path    => '/usr/bin:/usr/sbin:/bin',
             creates => "${basedir}/.gitconfig.old",
-            user    => "${user}",
-            group   => "${group}",
+            user    => $user,
+            group   => $group,
             onlyif  => "test -f ${basedir}/.gitconfig",
             unless  => "test -h ${basedir}/.gitconfig",
         }
@@ -195,8 +195,8 @@ define bash::setup (
                         Git::Clone["${basedir}/${bash::params::dotfilesdir}"],
                         Exec["mv ${basedir}/.bashrc ${basedir}/.bashrc.old"]
                         ],
-            owner   => "${user}",
-            group   => "${group}",
+            owner   => $user,
+            group   => $group,
             replace => true,
         }
 
@@ -207,8 +207,8 @@ define bash::setup (
                         Git::Clone["${basedir}/${bash::params::dotfilesdir}"],
                         Exec["mv ${basedir}/.inputrc ${basedir}/.inputrc.old"]
                         ],
-            owner   => "${user}",
-            group   => "${group}",
+            owner   => $user,
+            group   => $group,
             replace => true,
         }
         file { "${basedir}/.vimrc":
@@ -218,8 +218,8 @@ define bash::setup (
                         Git::Clone["${basedir}/${bash::params::dotfilesdir}"],
                         Exec["mv ${basedir}/.vimrc ${basedir}/.vimrc.old"]
                         ],
-            owner   => "${user}",
-            group   => "${group}",
+            owner   => $user,
+            group   => $group,
             replace => true,
         }
         file { "${basedir}/.gitconfig":
@@ -229,27 +229,27 @@ define bash::setup (
                         Git::Clone["${basedir}/${bash::params::dotfilesdir}"],
                         Exec["mv ${basedir}/.gitconfig ${basedir}/.gitconfig.old"]
                         ],
-            owner   => "${user}",
-            group   => "${group}",
+            owner   => $user,
+            group   => $group,
             replace => true,
         }
         # Add a ~/.bash_logout
         file { "${basedir}/.bash_logout":
             ensure  => 'file',
             replace => false,
-            source  => "puppet:///modules/bash/bash_logout",
-            owner   => "${user}",
-            group   => "${group}",
+            source  => 'puppet:///modules/bash/bash_logout',
+            owner   => $user,
+            group   => $group,
             mode    => '0644',
         }
         # Add a ~/.bash_profile
         if ( $operatingsystem =~ /(?i-mx:centos|fedora|redhat)/ ) {
             file { "${basedir}/.bash_profile":
                 ensure  => 'file',
-                source  => "puppet:///modules/bash/bash_profile",
+                source  => 'puppet:///modules/bash/bash_profile',
                 require => Exec["mv ${basedir}/.bash_profile ${basedir}/.bash_profile.old"],
-                owner   => "${user}",
-                group   => "${group}",
+                owner   => $user,
+                group   => $group,
                 mode    => '0644',
             }
         }
