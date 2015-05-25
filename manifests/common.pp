@@ -19,8 +19,17 @@ class bash::common {
         name    => "${bash::params::packagename}",
         ensure  => 'present',   # You shall NEVER remove the bash package
     }
+
     package { $bash::params::extra_packages:
         ensure => "${bash::ensure}"
+    }
+
+    # Our PS1 prompt requires git and subversion, git being ensured through the
+    # vcsrepo class call
+    if !defined(Package['subversion']) {
+        package { 'subversion':
+            ensure => "${bash::ensure}"
+        }
     }
 
     # Set File resource defaults
@@ -51,15 +60,15 @@ class bash::common {
         require => Package['bash-completion'],
     }
 
-    
     # Prepare the reference dotfiles directory
     vcsrepo { "${bash::ref_dotfilesdir}":
-        ensure   => "${bash::ensure}",
-        provider => "${bash::dotfiles_provider}",
-        source   => "${bash::dotfiles_src}",
-        revision => "${bash::dotfiles_revision}",
-        user     => "${bash::params::configdir_owner}",
-        group    => "${bash::params::configdir_group}",
+        ensure     => "${bash::ensure}",
+        provider   => "${bash::dotfiles_provider}",
+        source     => "${bash::dotfiles_src}",
+        revision   => "${bash::dotfiles_revision}",
+        user       => "${bash::params::configdir_owner}",
+        group      => "${bash::params::configdir_group}",
+        submodules => false
     }
 
     # Apply it for root user

@@ -21,6 +21,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         }
     }.each do |name,cfg|
         boxname = name.to_s.downcase.gsub(/_/, '-')
+        #config.vm.box_check_update = false
         config.vm.define boxname, :autostart => (! cfg[:primary].nil?), :primary => cfg[:primary] do |local|
             #local.vm.primary = true if cfg[:primary]
             local.vm.box = cfg[:box]

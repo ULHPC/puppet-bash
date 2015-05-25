@@ -59,8 +59,16 @@ define bash::setup (
     $group  = 'root'
 )
 {
+    if ! ($ensure in [ 'present', 'absent' ]) {
+        fail("bash::setup 'ensure' parameter must be set to either 'absent' or 'present'")
+    }
+
     include bash::params
 
+    if !defined(Class['bash']) {
+        include 'bash'
+    }
+    
     # Where to install .bashrc etc.
     $basedir = $path ? {
         ''      => "${name}",
@@ -75,6 +83,16 @@ define bash::setup (
     info("Running ${module_name}::setup in ${basedir} for user ${user} (with ensure = ${ensure})")
     $install_script = "${basedir}/${bash::params::dotfilesdir}/install.sh"
 
+    # Set File / Exec resource defaults
+    File {
+        owner  => "${user}",
+        group  => "${group}",
+    }
+    Exec {
+        user  => "${user}",
+        group => "${group}"
+    }
+
     if ($ensure == 'present')
     {
 
@@ -86,9 +104,9 @@ define bash::setup (
         # Now call the install script
         exec { "${install_script}":
             path    => "/usr/bin:/usr/sbin:/bin:/sbin",
-            command => "${install_script}",
+            command => "${install_script} --offline --dir '${basedir}/${bash::params::dotfilesdir}'",
             cwd     => "${basedir}",
-            onlyif  => "test -x ${install_script}"
+            onlyif  => "test -x ${install_script}",
             require => File["${basedir}/${bash::params::dotfilesdir}"]
         }
     }
@@ -99,15 +117,15 @@ define bash::setup (
         # Now call the install script
         exec { "${remove_cmd}":
             path    => "/usr/bin:/usr/sbin:/bin:/sbin",
-            command => "${remove_cmd}",
+            command => "${remove_cmd}  --dir '${basedir}/${bash::params::dotfilesdir}'",
             cwd     => "${basedir}",
-            onlyif  => "test -x ${install_script}"
-            require => File["${basedir}/${bash::params::dotfilesdir}"]
+            onlyif  => "test -x ${install_script}",
+            require => Vcsrepo["${bash::ref_dotfilesdir}"]
         }
 
         file { "${basedir}/${bash::params::dotfilesdir}":
             ensure  => "${ensure}",
-            require => Exec["${remove_script}"]
+            require => Exec["${remove_cmd}"]
         }
     }
 

@@ -2,7 +2,7 @@
 ##########################################################################
 # vagrant_init.rb
 # @author Sebastien Varrette <Sebastien.Varrette@uni.lu>
-# Time-stamp: <Lun 2015-03-30 22:42 svarrette>
+# Time-stamp: <Mon 2015-05-25 20:12 svarrette>
 #
 # @description 
 #
@@ -23,13 +23,15 @@ error "Unable to find the metadata.json" unless File.exists?(jsonfile)
 
 metadata   = JSON.parse( IO.read( jsonfile ) )
 name = metadata["name"].gsub(/^[^\/-]+[\/-]/,'') 
-metadata["dependencies"].each do |dep|
-	lib = dep["name"]
-	run %{ puppet module install #{lib} } 
-end
-
 modulepath=`puppet config print modulepath`.chomp
 moduledir=modulepath.split(':').first
+
+metadata["dependencies"].each do |dep|
+	lib = dep["name"]
+    action = File.directory?("#{moduledir}") ? 'upgrade' : 'install'
+	run %{ puppet module #{action} #{lib} } 
+end
+
 
 puts "Module path: #{modulepath}"
 puts "Moduledir:   #{moduledir}" 

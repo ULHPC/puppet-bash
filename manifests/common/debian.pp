@@ -7,4 +7,4 @@
 # = Class: bash::common::debian
 #
 # Specialization class for Debian systems
-class bash::common::debian inherits bash::common { }
+class bash::common::debian inherits bash::common {}
