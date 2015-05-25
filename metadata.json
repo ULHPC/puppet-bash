@@ -16,7 +16,7 @@
       "name": "puppetlabs-stdlib",
       "version_requirement": ">=4.2.2 <5.0.0"
     },
-	{
+    {
       "name": "puppetlabs-vcsrepo",
       "version_requirement": ">=1.3.0 <2.0.0"
     }
@@ -29,14 +29,14 @@
         "7"
       ]
     },
-	{
+    {
       "operatingsystem": "RedHat",
       "operatingsystemrelease": [
         "6",
         "7"
       ]
     },
-	{
+    {
       "operatingsystem": "CentOS",
       "operatingsystemrelease": [
         "6",
@@ -44,5 +44,19 @@
       ]
     }
   ],
-  "tags": ["shell", "gnu", "bash"]
+  "tags": [
+    "shell",
+    "gnu",
+    "bash"
+  ],
+  "classes": [
+    "bash",
+    "bash::common",
+    "bash::common::debian",
+    "bash::common::redhat",
+    "bash::params"
+  ],
+  "definitions": [
+    "bash::setup"
+  ]
 }
