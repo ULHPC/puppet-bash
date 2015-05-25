@@ -42,15 +42,15 @@ class bash::params {
 
     $dotfiles_provider = $::bash_dotfiles_provider ? {
         ''      => 'git',
-        default => "${::bash_dotfiles_provider}"
+        default => $::bash_dotfiles_provider
     }
     $dotfiles_src = $::bash_dotfiles_src ? {
         ''      => 'https://github.com/ULHPC/dotfiles.git',
-        default => "${::bash_dotfiles_src}"
+        default => $::bash_dotfiles_src
     }
     $dotfiles_revision = $::bash_dotfiles_revision ? {
         ''      => 'master',
-        default => "${::bash_dotfiles_src}"
+        default => $::bash_dotfiles_src
     }
 
 
@@ -83,17 +83,17 @@ class bash::params {
 
     # Configuration directory & file
     $configdir = $::operatingsystem ? {
-        default => "/etc/bashrc.d",
+        default => '/etc/bashrc.d',
     }
     $profile_dir = $::operatingsystem ? {
-        default => "/etc/profile.d",
+        default => '/etc/profile.d',
     }
     $completion_dir = $::operatingsystem ? {
-        default => "/etc/bash_completion.d"
+        default => '/etc/bash_completion.d'
     }
     $skel_dir = $::operatingsystem ? {
-        default => "/etc/skel"
-    }    
+        default => '/etc/skel'
+    }
     $configdir_mode = $::operatingsystem ? {
         default => '0755',
     }
@@ -111,7 +111,7 @@ class bash::params {
     # Aliases files -- eventually user defined
     $aliases_file = $bash_aliases_file ? {
         ''      => "${profile_dir}/bash_aliases.sh",
-        default => "${bash_aliases_file}"
+        default => $bash_aliases_file
     }
 
     $configfile_mode = $::operatingsystem ? {

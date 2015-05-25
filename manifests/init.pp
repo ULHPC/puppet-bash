@@ -65,7 +65,7 @@ inherits bash::params
         'Debian': { include bash::common::debian }
         'Redhat': { include bash::common::redhat }
         default: {
-            fail("Module $module_name is not supported on $::operatingsystem")
+            fail("Module ${module_name} is not supported on ${::operatingsystem}")
         }
     }
 }

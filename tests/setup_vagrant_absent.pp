@@ -19,7 +19,7 @@
 node default {
     include bash
 
-    bash::setup{ "/home/vagrant":
+    bash::setup{ '/home/vagrant':
         ensure => 'absent',
         user   => 'vagrant',   # Ensure you are running as the owner user of the homedir
         group  => 'vagrant',

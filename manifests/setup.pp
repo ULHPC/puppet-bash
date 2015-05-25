@@ -71,12 +71,12 @@ define bash::setup (
     
     # Where to install .bashrc etc.
     $basedir = $path ? {
-        ''      => "${name}",
-        default => "${path}"
+        ''      => $name,
+        default => $path
     }
 
     if ($basedir == '') {
-        fail("Unable to run bash::setup in an empty directory")
+        fail('Unable to run bash::setup in an empty directory')
     }
 
     # Let's go
@@ -85,12 +85,12 @@ define bash::setup (
 
     # Set File / Exec resource defaults
     File {
-        owner  => "${user}",
-        group  => "${group}",
+        owner  => $user,
+        group  => $group,
     }
     Exec {
-        user  => "${user}",
-        group => "${group}"
+        user  => $user,
+        group => $group
     }
 
     if ($ensure == 'present')
@@ -98,14 +98,14 @@ define bash::setup (
 
         file { "${basedir}/${bash::params::dotfilesdir}":
             ensure  => 'link',
-            target  => "${bash::ref_dotfilesdir}",
-            require => Vcsrepo["${bash::ref_dotfilesdir}"]
+            target  => $bash::ref_dotfilesdir,
+            require => Vcsrepo[$bash::ref_dotfilesdir]
         }
         # Now call the install script
-        exec { "${install_script}":
-            path    => "/usr/bin:/usr/sbin:/bin:/sbin",
+        exec { $install_script:
+            path    => '/usr/bin:/usr/sbin:/bin:/sbin',
             command => "${install_script} --offline --dir '${basedir}/${bash::params::dotfilesdir}'",
-            cwd     => "${basedir}",
+            cwd     => $basedir,
             onlyif  => "test -x ${install_script}",
             require => File["${basedir}/${bash::params::dotfilesdir}"]
         }
@@ -115,40 +115,40 @@ define bash::setup (
         $remove_cmd = "${install_script} --delete"
 
         # Now call the install script
-        exec { "${remove_cmd}":
-            path    => "/usr/bin:/usr/sbin:/bin:/sbin",
+        exec { $remove_cmd:
+            path    => '/usr/bin:/usr/sbin:/bin:/sbin',
             command => "${remove_cmd}  --dir '${basedir}/${bash::params::dotfilesdir}'",
-            cwd     => "${basedir}",
+            cwd     => $basedir,
             onlyif  => "test -x ${install_script}",
-            require => Vcsrepo["${bash::ref_dotfilesdir}"]
+            require => Vcsrepo[$bash::ref_dotfilesdir]
         }
 
         file { "${basedir}/${bash::params::dotfilesdir}":
-            ensure  => "${ensure}",
-            require => Exec["${remove_cmd}"]
+            ensure  => $ensure,
+            require => Exec[$remove_cmd]
         }
     }
 
     # Add a ~/.bash_logout
     file { "${basedir}/.bash_logout":
-        ensure  => "${ensure}",
+        ensure  => $ensure,
         replace => false,
         source  => "puppet:///modules/${module_name}/bash_logout",
-        owner   => "${user}",
-        group   => "${group}",
-        mode    => "${bash::params::configfile_mode}",
+        owner   => $user,
+        group   => $group,
+        mode    => $bash::params::configfile_mode,
     }
 
     # Add a ~/.bash_profile on Redhat systems
     if ( $::osfamily == 'Redhat') {
         file { "${basedir}/.bash_profile":
-            ensure  => "${ensure}",
-            source  => "puppet:///modules/${module_name}/bash_profile",
-            backup  => true,
+            ensure => $ensure,
+            source => "puppet:///modules/${module_name}/bash_profile",
+            backup => true,
             #require => Exec["mv ${basedir}/.bash_profile ${basedir}/.bash_profile.old"],
-            owner   => "${user}",
-            group   => "${group}",
-            mode    => "${bash::params::configfile_mode}",
+            owner  => $user,
+            group  => $group,
+            mode   => $bash::params::configfile_mode,
         }
     }
 

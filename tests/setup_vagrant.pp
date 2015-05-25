@@ -18,7 +18,7 @@
 node default {
     include bash
 
-    bash::setup{ "/home/vagrant":
+    bash::setup{ '/home/vagrant':
         ensure => 'present',
         user   => 'vagrant',
         group  => 'vagrant',
