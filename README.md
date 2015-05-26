@@ -12,7 +12,7 @@ Configure and manage Bourne Again SHell (Bash) dotfiles and profiles
       Copyright (c) 2015 UL HPC Management Team <hpc-sysadmins@uni.lu>
                     aka. S. Varrette, H. Cartiaux, V. Plugaru, S. Diehl 
 
-| [Project Page](https://github.com/ULHPC/puppet-bash) | [Sources](https://github.com/ULHPC/puppet-bash) | [Documentation](httpd://ulhpc-puppet-bash.readthedocs.org/en/latest/) | [Issues](https://github.com/ULHPC/puppet-bash/issues) |
+| [Project Page](https://github.com/ULHPC/puppet-bash) | [Sources](https://github.com/ULHPC/puppet-bash) | [Documentation](https://ulhpc-puppet-bash.readthedocs.org/en/latest/) | [Issues](https://github.com/ULHPC/puppet-bash/issues) |
 
 ## Synopsis
 
