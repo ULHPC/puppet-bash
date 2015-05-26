@@ -1,6 +1,6 @@
 {
   "name": "ULHPC/bash",
-  "version": "0.0.1",
+  "version": "0.5.0",
   "author": "S. Varrette, H. Cartiaux, V. Plugaru, S. Diehl aka. UL HPC Management Team",
   "mail": "hpc-sysadmins@uni.lu",
   "summary": "Configure and manage Bourne Again SHell (Bash) dotfiles and profiles",
