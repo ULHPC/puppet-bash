@@ -3,11 +3,10 @@
 # Bash Puppet Module 
 
 [![Puppet Forge](http://img.shields.io/puppetforge/v/ULHPC/bash.svg)](https://forge.puppetlabs.com/ULHPC/bash)
-[![Puppet Forge Downloads](http://img.shields.io/puppetforge/dt/ULHPC/bash.svg)](https://forge.puppetlabs.com/ULHPC/bash)
 [![License](http://img.shields.io/:license-Apache2.0-blue.svg)](LICENSE)
 ![Supported Platforms](http://img.shields.io/badge/platform-debian|redhat|centos-lightgrey.svg)
 [![Documentation Status](https://readthedocs.org/projects/ulhpc-puppet-bash/badge/?version=latest)](https://readthedocs.org/projects/ulhpc-puppet-bash/?badge=latest)
-[![By ULHPC](https://img.shields.io/badge/by-ULHPC-fb7047.svg)](http://hpc.uni.lu)
+[![By ULHPC](https://img.shields.io/badge/by-ULHPC-blue.svg?style=plastic)](http://hpc.uni.lu)
 
 Configure and manage Bourne Again SHell (Bash) dotfiles and profiles
 
