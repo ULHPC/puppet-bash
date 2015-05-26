@@ -56,6 +56,13 @@ class bash::common {
         require => Package['bash-completion'],
     }
 
+    # Force latest version of the dotfile
+    # $vcs_ensure = $bash::ensure ? {
+    #     'absent'  => 'absent',
+    #     'present' => 'latest',
+    #     default   => $bash::ensure
+    # }
+
     # Prepare the reference dotfiles directory
     vcsrepo { $bash::ref_dotfilesdir:
         ensure     => $bash::ensure,

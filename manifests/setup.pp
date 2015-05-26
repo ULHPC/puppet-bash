@@ -14,14 +14,28 @@
 #    Default: 'present'.
 #    Ensure the presence (or absence) of setup
 #
+# [*path*]
+#    If the title of the resource is not the homedir to consider, use path to precise the
+#    homedir to setup
+#
+# [*user*]
+#    Default: 'root'
+#    User that run the setup.
+#    BEWARE: it SHALL be the owner of the home directory you're trying to setup!!!!
+#
+# [*group*]
+#    Default: 'root'
+#    As above but for the group operating the commands.
+#    BEWARE again to use the appropriate group!
+#
 # == Actions
 #
 #  Configure the .bashrc etc. into a given home directory using specific configuration (see https://github.com/ULHPC/dotfiles).
 #  Actually, it not only creates the symlinks for .bashrc, .inputrc but also for
 # .screenrc and .gitconfig that are provided as part of the config.
 #
-# Note that it is expected that the dotfiles directory to contain an installation
-# script 'install.sh'
+# Note that it is expected that the dotfiles directory to contains an installation
+# script 'install.sh' at the root of the repository that accept the '--delete' command.
 #
 # == Requires
 #
@@ -36,10 +50,10 @@
 #  Configuration for the user $user
 #
 #     bash::setup { "/home/${user}":
-    #            ensure => 'present'
-    #            user   => "${user}",
-    #            group  => "${user}",
-    #     }
+#            ensure => 'present'
+#            user   => "${user}",
+#            group  => "${user}",
+#     }
 #
 # === Authors
 #
@@ -68,7 +82,7 @@ define bash::setup (
     if !defined(Class['bash']) {
         include 'bash'
     }
-    
+
     # Where to install .bashrc etc.
     $basedir = $path ? {
         ''      => $name,
@@ -112,12 +126,12 @@ define bash::setup (
     }
     else
     {
-        $remove_cmd = "${install_script} --delete"
+        $remove_cmd = "${install_script} --delete --dir '${basedir}/${bash::params::dotfilesdir}'"
 
         # Now call the install script
         exec { $remove_cmd:
             path    => '/usr/bin:/usr/sbin:/bin:/sbin',
-            command => "${remove_cmd}  --dir '${basedir}/${bash::params::dotfilesdir}'",
+            command => "${remove_cmd}",
             cwd     => $basedir,
             onlyif  => "test -x ${install_script}",
             require => Vcsrepo[$bash::ref_dotfilesdir]
