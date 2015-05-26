@@ -6,7 +6,7 @@
 # ------------------------------------------------------------------------------
 # = Defines: bash::setup
 #
-# Configures .bashrc and many other dotfiles (screenrc, bash aliases etc. )
+# Configures .bashrc and many other dotfiles (screenrc, bash aliases etc. ) for a given user
 #
 # == Parameters
 #
