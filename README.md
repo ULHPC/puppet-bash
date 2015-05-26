@@ -4,10 +4,10 @@
 
 [![Puppet Forge](http://img.shields.io/puppetforge/v/ULHPC/bash.svg)](https://forge.puppetlabs.com/ULHPC/bash)
 [![License](http://img.shields.io/:license-Apache2.0-blue.svg)](LICENSE)
-![Supported Platforms](http://img.shields.io/badge/platform-debian-lightgrey.svg)
+![Supported Platforms](http://img.shields.io/badge/platform-debian|redhat|centos-lightgrey.svg)
 [![Documentation Status](https://readthedocs.org/projects/ulhpc-puppet-bash/badge/?version=latest)](https://readthedocs.org/projects/ulhpc-puppet-bash/?badge=latest)
 
-Configure and manage bash dotfiles and profiles
+Configure and manage Bourne Again SHell (Bash) dotfiles and profiles
 
       Copyright (c) 2015 S. Varrette, H. Cartiaux, V. Plugaru, S. Diehl aka. UL HPC Management Team <hpc-sysadmins@uni.lu>
       
@@ -16,13 +16,20 @@ Configure and manage bash dotfiles and profiles
 
 ## Synopsis
 
-Configure and manage bash dotfiles and profiles.
+Configure and manage Bourne Again SHell (Bash) dotfiles and profile.
+ Bourne Again SHell (Bash) is the GNU Project's shell. Bash is an sh-compatible shell that incorporates useful features from the Korn shell (ksh) and C shell (csh). It is intended to conform to the IEEE POSIX P1003.2/ISO 9945.2 Shell and Tools standard. It offers functional improvements over sh for both programming and interactive use. In addition, most sh scripts can be run by Bash without modification..
 
 This module implements the following elements: 
 
 * __Puppet classes__:
+    - `bash` 
+    - `bash::common` 
+    - `bash::common::debian` 
+    - `bash::common::redhat` 
+    - `bash::params` 
 
 * __Puppet definitions__: 
+    - `bash::setup` 
 
 All these components are configured through a set of variables you will find in
 [`manifests/params.pp`](manifests/params.pp). 
@@ -35,6 +42,7 @@ See `docs/contributing.md` for more details on the steps you shall follow to hav
 See [`metadata.json`](metadata.json). In particular, this module depends on 
 
 * [puppetlabs/stdlib](https://forge.puppetlabs.com/puppetlabs/stdlib)
+* [puppetlabs/vcsrepo](https://forge.puppetlabs.com/puppetlabs/vcsrepo)
 
 ## Overview and Usage
 
@@ -51,6 +59,23 @@ Use it as follows:
 
 See also [`tests/init.pp`](tests/init.pp)
 
+
+### Definition `bash::setup`
+
+The definition `bash::setup` provides ...
+This definition accepts the following parameters:
+
+* `$ensure`: default to 'present', can be 'absent'
+* `$content`: specify the contents of the directive as a string
+* `$source`: copy a file as the content of the directive.
+
+Example:
+
+        bash::setup { 'toto':
+		      ensure => 'present',
+        }
+
+See also [`tests/setup.pp`](tests/setup.pp)
 
 
 ## Librarian-Puppet / R10K Setup
