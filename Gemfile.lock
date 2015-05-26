@@ -10,7 +10,7 @@ GEM
     diffy (3.0.7)
     facter (2.4.4)
       CFPropertyList (~> 2.2.6)
-    falkorlib (0.5.3)
+    falkorlib (0.5.4)
       artii (>= 2.1)
       awesome_print (~> 1.2)
       configatron (~> 3.2)
