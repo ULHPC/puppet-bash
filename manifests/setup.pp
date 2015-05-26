@@ -131,7 +131,6 @@ define bash::setup (
         # Now call the install script
         exec { $remove_cmd:
             path    => '/usr/bin:/usr/sbin:/bin:/sbin',
-            command => "${remove_cmd}",
             cwd     => $basedir,
             onlyif  => "test -x ${install_script}",
             require => Vcsrepo[$bash::ref_dotfilesdir]
