@@ -4,7 +4,7 @@
 
 [![Puppet Forge](http://img.shields.io/puppetforge/v/ULHPC/bash.svg)](https://forge.puppetlabs.com/ULHPC/bash)
 [![License](http://img.shields.io/:license-Apache2.0-blue.svg)](LICENSE)
-![Supported Platforms](http://img.shields.io/badge/platform-debian-lightgrey.svg)
+![Supported Platforms](http://img.shields.io/badge/platform-debian|redhat|centos-lightgrey.svg)
 [![Documentation Status](https://readthedocs.org/projects/ulhpc-puppet-bash/badge/?version=latest)](https://readthedocs.org/projects/ulhpc-puppet-bash/?badge=latest)
 
       Copyright (c) 2015 S. Varrette, H. Cartiaux, V. Plugaru, S. Diehl aka. UL HPC Management Team <hpc-sysadmins@uni.lu>
@@ -13,7 +13,7 @@
 
 
 -----------
-The [ULHPC/bash](https://github.com/ULHPC/puppet-bash) puppet module has been designed to configure and manage bash dotfiles and profiles
+The [ULHPC/bash](https://github.com/ULHPC/puppet-bash) puppet module has been designed to configure and manage bourne again shell (bash) dotfiles and profiles
 
 This is the main page of the documentation for this Puppet module, which is hosted and managed by [Read the Docs](http://ulhpc-bash.readthedocs.org/en/latest/).
 It proposes to detail the following elements:
