@@ -8,7 +8,7 @@ GEM
     deep_merge (1.0.1)
     diff-lcs (1.2.5)
     diffy (3.0.7)
-    facter (2.4.3)
+    facter (2.4.4)
       CFPropertyList (~> 2.2.6)
     falkorlib (0.5.3)
       artii (>= 2.1)
