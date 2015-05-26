@@ -116,7 +116,7 @@ You can submit bug / issues / feature request using the [ULHPC/bash Puppet Modul
 ## Developments / Contributing to the code 
 
 If you want to contribute to the code, you shall be aware of the way this module is organized. 
-These elements are detailed on [`docs/contributing.md`](contributing.md).
+These elements are detailed on `docs/contributing.md`.
 
 You are more than welcome to contribute to its development by [sending a pull request](https://help.github.com/articles/using-pull-requests). 
 
