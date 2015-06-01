@@ -14,7 +14,22 @@
 #   invocation                                                                 #
 ################################################################################
 
-if [ -f ~/.bashrc ]; then
-. ~/.bashrc
+# Local configuration
+: ${BASHRCD_BEFORE=~/.bashrc.before.d}
+: ${BASHRCD=~/.bashrc.d}
+
+if [ -d "${BASHRCD_BEFORE}" ]; then
+    for file in ${BASHRCD_BEFORE}/*.bash; do
+        source $file
+    done
 fi
 
+if [ -f ~/.bashrc ]; then
+   . ~/.bashrc
+fi
+
+if [ -d "${BASHRCD}" ]; then
+    for file in ${BASHRCD}/*.bash; do
+        source $file
+    done
+fi
