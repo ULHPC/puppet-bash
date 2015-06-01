@@ -19,7 +19,7 @@ node default {
     include bash
 
     Bash::Config {
-        ensure  => 'absent',
+        ensure  => 'present',
         warn    => true,
         rootdir => '/home/vagrant',
         owner   => 'vagrant',

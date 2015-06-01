@@ -32,6 +32,7 @@ This module implements the following elements:
 
 * __Puppet definitions__: 
     - `bash::setup` 
+    - `bash::config` 
 
 All these components are configured through a set of variables you will find in
 [`manifests/params.pp`](manifests/params.pp). 
@@ -43,6 +44,7 @@ See `docs/contributing.md` for more details on the steps you shall follow to hav
 
 See [`metadata.json`](metadata.json). In particular, this module depends on 
 
+* [puppetlabs/concat](https://forge.puppetlabs.com/puppetlabs/concat)
 * [puppetlabs/stdlib](https://forge.puppetlabs.com/puppetlabs/stdlib)
 * [puppetlabs/vcsrepo](https://forge.puppetlabs.com/puppetlabs/vcsrepo)
 
@@ -96,6 +98,46 @@ Example:
       }
 
 See also [`tests/vagrant_setup.pp`](tests/vagrant_setup.pp) or [`tests/vagrant_setup_absent.pp`](tests/vagrant_setup_absent.pp)
+
+### Definition `bash::config`
+
+Permit to define a global or local bash configuration.
+
+* _Global_ configurations are placed in `/etc/profile.d/<title>.bash`
+* _Local_ configurations are placed in `<rootdir>/.bash[.before].d/<title.bash>`
+
+This definition accepts the following parameters:
+
+* `$ensure`: default to 'present', can be 'absent'
+* `$content`:  Specify the contents of the `bash::config` entry as a string. Newlines, tabs, and spaces can be specified using the escaped syntax (e.g., \n for a newline)
+* `$source`: Copy a file as the content of the `bash::config` entry
+* `$rootdir`: Specifies a root directory hosting the bash configuration file. 
+    - Set it to a homedir (and precise the `owner` and `group` directives) to make the configuration local and placed in `<rootdir>/.bash[.before].d/<title>.bash`
+* `$owner`: specifies the owner of the destination file
+   - _Default_: `root` 
+* `$group`: specifies a permissions group for the destination file. 
+   - _Default_: `root`
+* `$mode`: Specifies the permissions mode of the destination file.
+   - _Default_: `0644`
+* `$before_hook`: specifies if the bash configuration should be placed as a before hook. Only valid if rootdir is set.
+   - _Default_: `false`
+* `$warn`: Specifies whether to add a header message at the top of the destination file. Valid options: the booleans 'true' and 'false', or a string to serve as the header.
+   - _Default_: `false`
+
+Example:
+
+      include bash
+
+      # Install in /etc/profile.d
+      bash::config{ 'modules':
+         ensure  => 'present',
+         warn    => true,
+         content => "# Environment Module Path
+	  export MODULEPATH='$HOME/.local/easybuild/modules/all:/opt/apps/easybuild/modules/all:/opt/apps/default/modules/all:$HOME/privatemodules:$HOME/easybuild/modules/all'"
+      }
+
+See also [`tests/config.pp`](tests/config.pp) or [`tests/config_vagrant.pp`](tests/config_vagrant.pp)
+
 
 ## Librarian-Puppet / R10K Setup
 

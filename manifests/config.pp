@@ -19,23 +19,32 @@
 #   Default: 'present'
 #
 # [*content*]
-#  Specify the contents of the mydef entry as a string. Newlines, tabs,
+#  Specify the contents of the bash::config entry as a string. Newlines, tabs,
 #  and spaces can be specified using the escaped syntax (e.g., \n for a newline)
 #
 # [*source*]
-#  Copy a file as the content of the mydef entry.
+#  Copy a file as the content of the bash::config entry.
 #  Uses checksum to determine when a file should be copied.
 #  Valid values are either fully qualified paths to files, or URIs. Currently
 #  supported URI types are puppet and file.
 #  In neither the 'source' or 'content' parameter is specified, then the
 #  following parameters can be used to set the console entry.
 #
-# [*path*]
-#  Root directory where to install the hook file.
+# [*owner*]
+#  Specifies the owner of the destination file. Valid options: a string containing a username.
+#  Default: 'root'
+#
+# [*group*]
+#  Specifies a permissions group for the destination file. Valid options: a string containing a group name.
+#  Default: 'root'
+#
+# [*mode*]
+#  Specifies the permissions mode of the destination file. Valid options: a string containing a permission mode value in octal notation. 
+#  Default: '0644'
 #
 # [*rootdir*]
 #  Specifies a root directory hosting the bash configuration file.
-#  Set it to a homedir (and precise the user and group directives) to make the configuration local and
+#  Set it to a homedir (and precise the owner and group directives) to make the configuration local and
 #  placed to <rootdir>/.bash.d/<title>.bash
 #  Default: /etc/profile.d
 #
@@ -44,7 +53,6 @@
 #  Only valid if rootdir is set. Then the configuration file will be placed in
 #  <rootdir>/.bash.before.d/<title>.bash
 #  Default: false
-#
 #
 # [*warn*]
 #   Specifies whether to add a header message at the top of the destination file.
