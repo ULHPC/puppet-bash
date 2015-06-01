@@ -125,31 +125,31 @@ define bash::config(
         }
     }
 
-    if (! defined(File["${dir}"])) {
+    if (! defined(File[$dir])) {
         $dir_ensure = $ensure ? {
             'present' => 'directory',
             default   => $ensure
         }
-        file { "${dir}":
+        file { $dir:
             ensure => $dir_ensure,
-            owner  => "$owner",
-            group  => "$group",
-            mode   => "${bash::params::configdir_mode}"
+            owner  => $owner,
+            group  => $group,
+            mode   => $bash::params::configdir_mode
         }
     }
     $path = "${dir}/${filename}.bash"
 
-    concat { "${path}":
+    concat { $path:
         ensure         => $ensure,
         warn           => $warn,
         owner          => $owner,
         group          => $group,
         ensure_newline => true,
-        require        => File["${dir}"]
+        require        => File[$dir]
     }
 
-    concat::fragment  { "${path}":
-        target => "${path}",
+    concat::fragment  { $path:
+        target  => $path,
         content => $real_content,
         source  => $real_source,
     }
