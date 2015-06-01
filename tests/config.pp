@@ -23,14 +23,14 @@ node default {
         warn    => true,
         content => "
 # Environment Module Path
-export MODULEPATH='$HOME/.local/easybuild/modules/all:/opt/apps/easybuild/modules/all:/opt/apps/default/modules/all:$HOME/privatemodules:$HOME/easybuild/modules/all'"
+export MODULEPATH='${HOME}/.local/easybuild/modules/all:/opt/apps/easybuild/modules/all:/opt/apps/default/modules/all:${HOME}/privatemodules:${HOME}/easybuild/modules/all'"
     }
 
 
     bash::config{ 'sysadminrc':
-        ensure      => 'present',
-        warn        => true,
-        content     => "
+        ensure  => 'present',
+        warn    => true,
+        content => "
 # Load .sysadminrc if present
 if [ -f ~/.sysadminrc ]; then 
     . ~/.sysadminrc
