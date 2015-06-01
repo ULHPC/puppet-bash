@@ -31,7 +31,25 @@
 #  following parameters can be used to set the console entry.
 #
 # [*path*]
-#   Root directory where to install the hook file.
+#  Root directory where to install the hook file.
+#
+# [*rootdir*]
+#  Specifies a root directory hosting the bash configuration file.
+#  Set it to a homedir (and precise the user and group directives) to make the configuration local and
+#  placed to <rootdir>/.bash.d/<title>.bash
+#  Default: /etc/profile.d
+#
+# [*before_hook*]
+#  Specifies if the bash configuration should be placed as a before hook.
+#  Only valid if rootdir is set. Then the configuration file will be placed in
+#  <rootdir>/.bash.before.d/<title>.bash
+#  Default: false
+#
+#
+# [*warn*]
+#   Specifies whether to add a header message at the top of the destination file.
+#   Valid options: the booleans 'true' and 'false', or a string to serve as the header.
+#   Default: 'false'.
 #
 # === Sample usage
 #
