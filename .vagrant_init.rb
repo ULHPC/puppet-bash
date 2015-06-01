@@ -2,7 +2,7 @@
 ##########################################################################
 # vagrant_init.rb
 # @author Sebastien Varrette <Sebastien.Varrette@uni.lu>
-# Time-stamp: <Mon 2015-05-25 20:12 svarrette>
+# Time-stamp: <Thu 2015-05-28 14:06 svarrette>
 #
 # @description 
 #
@@ -28,7 +28,8 @@ moduledir=modulepath.split(':').first
 
 metadata["dependencies"].each do |dep|
 	lib = dep["name"]
-    action = File.directory?("#{moduledir}") ? 'upgrade' : 'install'
+    shortname = lib.gsub(/^.*[\/-]/,'')
+    action = File.directory?("#{moduledir}/#{shortname}") ? 'upgrade' : 'install'
 	run %{ puppet module #{action} #{lib} } 
 end
 

@@ -74,6 +74,8 @@ class bash::params {
     $dotfilesdir = $::operatingsystem ? {
         default => '.dotfiles.d'
     }
+    $local_confdir_before = '.bash.before.d'
+    $local_confdir        = '.bash.d'
 
     # Profile directory
     # $bash_completion_giturl  = "https://github.com/GArik/bash-completion.git"

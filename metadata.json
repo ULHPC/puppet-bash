@@ -1,6 +1,6 @@
 {
   "name": "ULHPC/bash",
-  "version": "0.5.2",
+  "version": "0.6.0",
   "author": "S. Varrette, H. Cartiaux, V. Plugaru, S. Diehl aka. UL HPC Management Team",
   "mail": "hpc-sysadmins@uni.lu",
   "summary": "Configure and manage Bourne Again SHell (Bash) dotfiles and profiles",
@@ -19,6 +19,10 @@
     {
       "name": "puppetlabs-vcsrepo",
       "version_requirement": ">=1.3.0 <2.0.0"
+    },
+    {
+      "name": "puppetlabs/concat",
+      "version_requirement": "2.x"
     }
   ],
   "operatingsystem_support": [
@@ -57,6 +61,7 @@
     "bash::params"
   ],
   "definitions": [
+    "bash::config",
     "bash::setup"
   ]
 }

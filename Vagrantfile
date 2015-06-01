@@ -25,6 +25,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
             #local.vm.primary = true if cfg[:primary]
             local.vm.box = cfg[:box]
             local.vm.host_name = ENV['VAGRANT_HOSTNAME'] || name.to_s.downcase.gsub(/_/, '-').concat(".vagrant.com")
+            #config.vm.box_check_update = false
             local.vm.provision "shell", path: ".vagrant_init.rb"
             # local.vm.provision :puppet do |puppet|
             #     puppet.hiera_config_path = 'data/hiera.yaml'
