@@ -132,6 +132,7 @@ define bash::config(
         }
         file { $dir:
             ensure => $dir_ensure,
+            force  => true,
             owner  => $owner,
             group  => $group,
             mode   => $bash::params::configdir_mode
