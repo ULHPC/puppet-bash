@@ -6,12 +6,11 @@
 [![License](http://img.shields.io/:license-Apache2.0-blue.svg)](LICENSE)
 ![Supported Platforms](http://img.shields.io/badge/platform-debian|redhat|centos-lightgrey.svg)
 [![Documentation Status](https://readthedocs.org/projects/ulhpc-puppet-bash/badge/?version=latest)](https://readthedocs.org/projects/ulhpc-puppet-bash/?badge=latest)
-[![By ULHPC](https://img.shields.io/badge/by-ULHPC-blue.svg)](http://hpc.uni.lu)
 
 Configure and manage Bourne Again SHell (Bash) dotfiles and profiles
 
-      Copyright (c) 2015 UL HPC Management Team <hpc-sysadmins@uni.lu>
-                    aka. S. Varrette, H. Cartiaux, V. Plugaru, S. Diehl 
+      Copyright (c) 2016 S. Varrette, H. Cartiaux, V. Plugaru, S. Diehl aka. UL HPC Management Team <hpc-sysadmins@uni.lu>
+      
 
 | [Project Page](https://github.com/ULHPC/puppet-bash) | [Sources](https://github.com/ULHPC/puppet-bash) | [Documentation](https://ulhpc-puppet-bash.readthedocs.org/en/latest/) | [Issues](https://github.com/ULHPC/puppet-bash/issues) |
 
@@ -141,7 +140,8 @@ See also [`tests/config.pp`](tests/config.pp) or [`tests/config_vagrant.pp`](tes
 
 ## Librarian-Puppet / R10K Setup
 
-You can of course configure the bash module in your `Puppetfile` to make it available with [Librarian puppet](http://librarian-puppet.com/) or [r10k](https://github.com/adrienthebo/r10k) by adding the following entry:
+You can of course configure the bash module in your `Puppetfile` to make it available with [Librarian puppet](http://librarian-puppet.com/) or
+[r10k](https://github.com/adrienthebo/r10k) by adding the following entry:
 
      # Modules from the Puppet Forge
      mod "ULHPC/bash"
@@ -159,25 +159,26 @@ You can submit bug / issues / feature request using the [ULHPC/bash Puppet Modul
 ## Developments / Contributing to the code 
 
 If you want to contribute to the code, you shall be aware of the way this module is organized. 
-These elements are detailed on `docs/contributing.md`.
+These elements are detailed on [`docs/contributing.md`](contributing/index.md).
 
 You are more than welcome to contribute to its development by [sending a pull request](https://help.github.com/articles/using-pull-requests). 
 
 ## Puppet modules tests within a Vagrant box
 
 The best way to test this module in a non-intrusive way is to rely on [Vagrant](http://www.vagrantup.com/).
-The `Vagrantfile` at the root of the repository pilot the provisioning of various vagrant boxes available on [Vagrant cloud](https://atlas.hashicorp.com/boxes/search?utf8=%E2%9C%93&sort=&provider=virtualbox&q=svarrette) you can use to test this module.
+The `Vagrantfile` at the root of the repository pilot the provisioning various vagrant boxes available on [Vagrant cloud](https://atlas.hashicorp.com/boxes/search?utf8=%E2%9C%93&sort=&provider=virtualbox&q=svarrette) you can use to test this module.
 
 See [`docs/vagrant.md`](vagrant.md) for more details. 
 
 ## Online Documentation
 
-[Read the Docs](https://readthedocs.org/) aka RTFD hosts documentation for the open source community and the [ULHPC/bash](https://github.com/ULHPC/puppet-bash) puppet module has its documentation (see the `docs/` directory directly) hosted on [readthedocs](http://ulhpc-puppet-bash.rtfd.org).
+[Read the Docs](https://readthedocs.org/) aka RTFD hosts documentation for the open source community and the [ULHPC/bash](https://github.com/ULHPC/puppet-bash) puppet module has its documentation (see the `docs/` directly) hosted on [readthedocs](http://ulhpc-puppet-bash.rtfd.org).
 
 See [`docs/rtfd.md`](rtfd.md) for more details.
 
 ## Licence
 
-This project and the sources proposed within this repository are released under the terms of the [Apache 2.0](LICENCE) licence. 
+This project and the sources proposed within this repository are released under the terms of the [Apache-2.0](LICENCE) licence.
+
 
 [![Licence](https://www.apache.org/images/feather-small.gif)](LICENSE)
