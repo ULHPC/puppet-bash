@@ -142,30 +142,5 @@ define bash::setup (
         }
     }
 
-    # Add a ~/.bash_logout
-    file { "${basedir}/.bash_logout":
-        ensure  => $ensure,
-        replace => false,
-        source  => "puppet:///modules/${module_name}/bash_logout",
-        owner   => $user,
-        group   => $group,
-        mode    => $bash::params::configfile_mode,
-    }
-
-    # Add a ~/.bash_profile on Redhat systems
-    if ( $::osfamily == 'Redhat') {
-        file { "${basedir}/.bash_profile":
-            ensure => $ensure,
-            source => "puppet:///modules/${module_name}/bash_profile",
-            backup => true,
-            #require => Exec["mv ${basedir}/.bash_profile ${basedir}/.bash_profile.old"],
-            owner  => $user,
-            group  => $group,
-            mode   => $bash::params::configfile_mode,
-        }
-    }
-
-
-
 
 }
