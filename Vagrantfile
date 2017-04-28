@@ -11,8 +11,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     # (nearly) All below boxes were generated using [vagrant-vms](https://github.com/Falkor/vagrant-vms/)
     {
         :centos_7 => {
-            :box => "svarrette/centos-7",
-            :url => "https://atlas.hashicorp.com/svarrette/boxes/centos-7"
+            :box => "svarrette/centos-7-puppet",
+            :url => "https://atlas.hashicorp.com/svarrette/boxes/centos-7-puppet"
         },
         :debian_7 => {
             :box     => "svarrette/debian-7-puppet",
