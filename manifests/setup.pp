@@ -96,7 +96,7 @@ define bash::setup (
     # Let's go
     info("Running ${module_name}::setup in ${basedir} for user ${user} (with ensure = ${ensure})")
     $install_script = "${basedir}/${bash::params::dotfilesdir}/install.sh"
-    $install_script_options = "--offline --bash --screen"
+    $install_script_options = '--offline --bash --screen'
 
     # Set File / Exec resource defaults
     File {

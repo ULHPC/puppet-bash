@@ -95,10 +95,7 @@ class bash::params {
     default  => '/etc/bash.bashrc'
   }
   # Aliases files -- eventually user defined
-  $aliases_file = $::bash_aliases_file ? {
-    ''      => "${profile_dir}/bash_aliases.sh",
-    default => $::bash_aliases_file
-  }
+  $aliases_file = "${profile_dir}/bash_aliases.sh"
 
   $configfile_mode = $::operatingsystem ? {
     default => '0644',
