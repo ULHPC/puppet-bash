@@ -1,6 +1,6 @@
 -*- mode: markdown; mode: visual-line;  -*-
 
-# Bash Puppet Module 
+# Bash Puppet Module
 
 [![Puppet Forge](http://img.shields.io/puppetforge/v/ULHPC/bash.svg)](https://forge.puppetlabs.com/ULHPC/bash)
 [![License](http://img.shields.io/:license-Apache2.0-blue.svg)](LICENSE)
@@ -9,8 +9,8 @@
 
 Configure and manage Bourne Again SHell (Bash) dotfiles and profiles
 
-      Copyright (c) 2016 S. Varrette, H. Cartiaux, V. Plugaru, S. Diehl aka. UL HPC Management Team <hpc-sysadmins@uni.lu>
-      
+      Copyright (c) 2016 S. Varrette, H. Cartiaux, V. Plugaru, S. Diehl, C. Parisot aka. UL HPC Management Team <hpc-sysadmins@uni.lu>
+
 
 | [Project Page](https://github.com/ULHPC/puppet-bash) | [Sources](https://github.com/ULHPC/puppet-bash) | [Documentation](https://ulhpc-puppet-bash.readthedocs.org/en/latest/) | [Issues](https://github.com/ULHPC/puppet-bash/issues) |
 
@@ -20,28 +20,28 @@ Configure and manage [Bourne Again SHell (Bash)](http://www.gnu.org/software/bas
 Bourne Again SHell ([Bash](http://www.gnu.org/software/bash/)) is the GNU Project's shell.
 Bash is an sh-compatible shell that incorporates useful features from the Korn shell (ksh) and C shell (csh). It is intended to conform to the IEEE POSIX P1003.2/ISO 9945.2 Shell and Tools standard. It offers functional improvements over sh for both programming and interactive use. In addition, most sh scripts can be run by Bash without modification.
 
-This module implements the following elements: 
+This module implements the following elements:
 
 * __Puppet classes__:
-    - `bash` 
-    - `bash::common` 
+    - `bash`
+    - `bash::common`
     - `bash::common::debian`: specific implementation under Debian
-    - `bash::common::redhat`: specific implementation under Redhat-like system 
+    - `bash::common::redhat`: specific implementation under Redhat-like system
     - `bash::params`: module parameters
 
-* __Puppet definitions__: 
-    - `bash::setup` 
-    - `bash::config` 
+* __Puppet definitions__:
+    - `bash::setup`
+    - `bash::config`
 
 All these components are configured through a set of variables you will find in
-[`manifests/params.pp`](manifests/params.pp). 
+[`manifests/params.pp`](manifests/params.pp).
 
 _Note_: the various operations that can be conducted from this repository are piloted from a [`Rakefile`](https://github.com/ruby/rake) and assumes you have a running [Ruby](https://www.ruby-lang.org/en/) installation.
-See `docs/contributing.md` for more details on the steps you shall follow to have this `Rakefile` working properly. 
+See `docs/contributing.md` for more details on the steps you shall follow to have this `Rakefile` working properly.
 
 ## Dependencies
 
-See [`metadata.json`](metadata.json). In particular, this module depends on 
+See [`metadata.json`](metadata.json). In particular, this module depends on
 
 * [puppetlabs/concat](https://forge.puppetlabs.com/puppetlabs/concat)
 * [puppetlabs/stdlib](https://forge.puppetlabs.com/puppetlabs/stdlib)
@@ -52,7 +52,7 @@ See [`metadata.json`](metadata.json). In particular, this module depends on
 ### Class `bash`
 
 This is the main class defined in this module.
-It accepts the following parameters: 
+It accepts the following parameters:
 
 * `$ensure`: default to 'present', can be 'absent'
 * `$aliases`: Hash of key / command values to place in a aliases files
@@ -61,9 +61,9 @@ It accepts the following parameters:
 * `$dotfiles_provider`: Type of dotfiles provider
     - _Default_: `git`
 * `$dotfiles_src`:  URL of the [Git] repository hosting the dotfiles. Note that it is expected that this dotfiles directory contains an installation script `install.sh` at the root of the repository that accept the '`--delete`' command.
-	- _Default:_ <https://github.com/ULHPC/dotfiles.git>. 
+	- _Default:_ <https://github.com/ULHPC/dotfiles.git>.
 * `$dotfiles_revision`: [git] branch / revision / tag to use.
-    - _Default:_  `master` 
+    - _Default:_  `master`
 
 Use it as follows:
 
@@ -110,11 +110,11 @@ This definition accepts the following parameters:
 * `$ensure`: default to 'present', can be 'absent'
 * `$content`:  Specify the contents of the `bash::config` entry as a string. Newlines, tabs, and spaces can be specified using the escaped syntax (e.g., \n for a newline)
 * `$source`: Copy a file as the content of the `bash::config` entry
-* `$rootdir`: Specifies a root directory hosting the bash configuration file. 
+* `$rootdir`: Specifies a root directory hosting the bash configuration file.
     - Set it to a homedir (and precise the `owner` and `group` directives) to make the configuration local and placed in `<rootdir>/.bash[.before].d/<title>.bash`
 * `$owner`: specifies the owner of the destination file
-   - _Default_: `root` 
-* `$group`: specifies a permissions group for the destination file. 
+   - _Default_: `root`
+* `$group`: specifies a permissions group for the destination file.
    - _Default_: `root`
 * `$mode`: Specifies the permissions mode of the destination file.
    - _Default_: `0644`
@@ -146,29 +146,29 @@ You can of course configure the bash module in your `Puppetfile` to make it avai
      # Modules from the Puppet Forge
      mod "ULHPC/bash"
 
-or, if you prefer to work on the git version: 
+or, if you prefer to work on the git version:
 
-     mod "ULHPC/bash", 
+     mod "ULHPC/bash",
          :git => 'https://github.com/ULHPC/puppet-bash',
-         :ref => 'production' 
+         :ref => 'production'
 
 ## Issues / Feature request
 
-You can submit bug / issues / feature request using the [ULHPC/bash Puppet Module Tracker](https://github.com/ULHPC/puppet-bash/issues). 
+You can submit bug / issues / feature request using the [ULHPC/bash Puppet Module Tracker](https://github.com/ULHPC/puppet-bash/issues).
 
-## Developments / Contributing to the code 
+## Developments / Contributing to the code
 
-If you want to contribute to the code, you shall be aware of the way this module is organized. 
+If you want to contribute to the code, you shall be aware of the way this module is organized.
 These elements are detailed on [`docs/contributing.md`](contributing/index.md).
 
-You are more than welcome to contribute to its development by [sending a pull request](https://help.github.com/articles/using-pull-requests). 
+You are more than welcome to contribute to its development by [sending a pull request](https://help.github.com/articles/using-pull-requests).
 
 ## Puppet modules tests within a Vagrant box
 
 The best way to test this module in a non-intrusive way is to rely on [Vagrant](http://www.vagrantup.com/).
 The `Vagrantfile` at the root of the repository pilot the provisioning various vagrant boxes available on [Vagrant cloud](https://atlas.hashicorp.com/boxes/search?utf8=%E2%9C%93&sort=&provider=virtualbox&q=svarrette) you can use to test this module.
 
-See [`docs/vagrant.md`](vagrant.md) for more details. 
+See [`docs/vagrant.md`](vagrant.md) for more details.
 
 ## Online Documentation
 

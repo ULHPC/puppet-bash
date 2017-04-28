@@ -96,6 +96,7 @@ define bash::setup (
     # Let's go
     info("Running ${module_name}::setup in ${basedir} for user ${user} (with ensure = ${ensure})")
     $install_script = "${basedir}/${bash::params::dotfilesdir}/install.sh"
+    $install_script_options = "--offline --bash --screen"
 
     # Set File / Exec resource defaults
     File {
@@ -118,7 +119,7 @@ define bash::setup (
         # Now call the install script
         exec { $install_script:
             path    => '/usr/bin:/usr/sbin:/bin:/sbin',
-            command => "${install_script} --offline --dir '${basedir}/${bash::params::dotfilesdir}'",
+            command => "${install_script} --dir '${basedir}/${bash::params::dotfilesdir}' ${install_script_options}",
             cwd     => $basedir,
             onlyif  => "test -x ${install_script}",
             require => File["${basedir}/${bash::params::dotfilesdir}"]
@@ -126,7 +127,7 @@ define bash::setup (
     }
     else
     {
-        $remove_cmd = "${install_script} --delete --dir '${basedir}/${bash::params::dotfilesdir}'"
+        $remove_cmd = "${install_script} --delete --dir '${basedir}/${bash::params::dotfilesdir}' ${install_script_options}"
 
         # Now call the install script
         exec { $remove_cmd:
