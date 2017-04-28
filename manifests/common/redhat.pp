@@ -10,7 +10,7 @@
 class bash::common::redhat inherits bash::common {
     # BUGFIX on __git_ps1() missing
     # ln -s /usr/share/git-core/contrib/completion/git-prompt.sh  /etc/profile.d/
-    file { "${dotfiles::params::profile_dir}/git-prompt.sh":
+    file { "${bash::params::profile_dir}/git-prompt.sh":
         ensure => 'link',
         target => '/usr/share/git-core/contrib/completion/git-prompt.sh'
     }
