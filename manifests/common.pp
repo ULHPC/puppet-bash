@@ -15,6 +15,10 @@ class bash::common {
     # Load the variables used in this module. Check the params.pp file
     require bash::params
 
+    if !defined(Class['profiled']) {
+      include ::profiled
+    }
+
     package { 'bash':
         ensure => 'present',   # You shall NEVER remove the bash package
         name   => $bash::params::packagename,
@@ -44,7 +48,8 @@ class bash::common {
         content => template("${module_name}/bash_aliases.sh.erb"),
     }
 
-    file {  [ $bash::params::profile_dir, $bash::params::skel_dir ]:
+    #    file {  [ $bash::params::profile_dir, $bash::params::skel_dir ]:
+    file {  $bash::params::skel_dir:
         ensure  => 'directory',
         mode    => $bash::params::configdir_mode,
         require => Package['bash'],
