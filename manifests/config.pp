@@ -104,8 +104,6 @@ define bash::config(
         }
     }
 
-    $real_source  = undef
-    $real_content = undef
     # if content is passed, use that, else if source is passed use that
     case $content {
         '': {
