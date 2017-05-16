@@ -39,7 +39,7 @@
 #  Default: 'root'
 #
 # [*mode*]
-#  Specifies the permissions mode of the destination file. Valid options: a string containing a permission mode value in octal notation. 
+#  Specifies the permissions mode of the destination file. Valid options: a string containing a permission mode value in octal notation.
 #  Default: '0644'
 #
 # [*rootdir*]
@@ -68,7 +68,7 @@
 #         content => "[[ -f '~/.sysadminrc' ]] && source ~/.sysadminrc"
 #     }
 #
-#     
+#
 #
 # == Warnings
 #
@@ -76,7 +76,7 @@
 #    here[http://docs.puppetlabs.com/guides/style_guide]
 #
 #    [Remember: No empty lines between comments and class definition]
-# 
+#
 define bash::config(
     $ensure         = 'present',
     $content        = '',
@@ -100,10 +100,12 @@ define bash::config(
 
     if ($bash::ensure != $ensure) {
         if ($bash::ensure != 'present') {
-            fail("Cannot configure a bash::local::before '${filename}' as bash::ensure is NOT set to present (but ${bash::ensure})")
+            fail("Cannot configure a bash::config '${filename}' as bash::ensure is NOT set to present (but ${bash::ensure})")
         }
     }
 
+    $real_source  = undef
+    $real_content = undef
     # if content is passed, use that, else if source is passed use that
     case $content {
         '': {
