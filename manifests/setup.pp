@@ -122,6 +122,7 @@ define bash::setup (
             command => "${install_script} --dir '${basedir}/${bash::params::dotfilesdir}' ${install_script_options}",
             cwd     => $basedir,
             onlyif  => "test -x ${install_script}",
+            unless  => "test -h ${basedir}/.bashrc",
             require => File["${basedir}/${bash::params::dotfilesdir}"]
         }
     }
