@@ -9,16 +9,15 @@
 
 Configure and manage Bourne Again SHell (Bash) dotfiles and profiles
 
-      Copyright (c) 2016 S. Varrette, H. Cartiaux, V. Plugaru, S. Diehl, C. Parisot aka. UL HPC Management Team <hpc-sysadmins@uni.lu>
-
+      Copyright (c) 2019 UL HPC Team <hpc-sysadmins@uni.lu>
+      
 
 | [Project Page](https://github.com/ULHPC/puppet-bash) | [Sources](https://github.com/ULHPC/puppet-bash) | [Documentation](https://ulhpc-puppet-bash.readthedocs.org/en/latest/) | [Issues](https://github.com/ULHPC/puppet-bash/issues) |
 
 ## Synopsis
 
-Configure and manage [Bourne Again SHell (Bash)](http://www.gnu.org/software/bash/) dotfiles and profile.
-Bourne Again SHell ([Bash](http://www.gnu.org/software/bash/)) is the GNU Project's shell.
-Bash is an sh-compatible shell that incorporates useful features from the Korn shell (ksh) and C shell (csh). It is intended to conform to the IEEE POSIX P1003.2/ISO 9945.2 Shell and Tools standard. It offers functional improvements over sh for both programming and interactive use. In addition, most sh scripts can be run by Bash without modification.
+Configure and manage Bourne Again SHell (Bash) dotfiles and profile.
+ Bourne Again SHell (Bash) is the GNU Project's shell. Bash is an sh-compatible shell that incorporates useful features from the Korn shell (ksh) and C shell (csh). It is intended to conform to the IEEE POSIX P1003.2/ISO 9945.2 Shell and Tools standard. It offers functional improvements over sh for both programming and interactive use. In addition, most sh scripts can be run by Bash without modification..
 
 This module implements the following elements:
 
@@ -43,9 +42,10 @@ See `docs/contributing.md` for more details on the steps you shall follow to hav
 
 See [`metadata.json`](metadata.json). In particular, this module depends on
 
-* [puppetlabs/concat](https://forge.puppetlabs.com/puppetlabs/concat)
 * [puppetlabs/stdlib](https://forge.puppetlabs.com/puppetlabs/stdlib)
 * [puppetlabs/vcsrepo](https://forge.puppetlabs.com/puppetlabs/vcsrepo)
+* [puppetlabs/concat](https://forge.puppetlabs.com/puppetlabs/concat)
+* [unibet/profiled](https://forge.puppetlabs.com/unibet/profiled)
 
 ## Overview and Usage
 
