@@ -89,7 +89,7 @@ define bash::config(
     $mode           = '0644'
 )
 {
-    include bash::params
+    include ::bash::params
 
     # $name is provided at define invocation
     $filename = $name
@@ -135,7 +135,7 @@ define bash::config(
             force  => true,
             owner  => $owner,
             group  => $group,
-            mode   => $bash::params::configdir_mode
+            mode   => $bash::params::configdir_mode,
         }
     }
     $path = "${dir}/${filename}.bash"
@@ -146,7 +146,7 @@ define bash::config(
         owner          => $owner,
         group          => $group,
         ensure_newline => true,
-        require        => File[$dir]
+        require        => File[$dir],
     }
 
     concat::fragment  { $path:

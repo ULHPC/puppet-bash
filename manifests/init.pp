@@ -62,8 +62,8 @@ inherits bash::params
     }
 
     case $::osfamily {
-        'Debian': { include bash::common::debian }
-        'Redhat': { include bash::common::redhat }
+        'Debian': { include ::bash::common::debian }
+        'Redhat': { include ::bash::common::redhat }
         default: {
             fail("Module ${module_name} is not supported on ${::operatingsystem}")
         }

@@ -77,10 +77,10 @@ define bash::setup (
         fail("bash::setup 'ensure' parameter must be set to either 'absent' or 'present'")
     }
 
-    include bash::params
+    include ::bash::params
 
     if !defined(Class['bash']) {
-        include 'bash'
+        include '::bash'
     }
 
     # Where to install .bashrc etc.
@@ -105,7 +105,7 @@ define bash::setup (
     }
     Exec {
         user  => $user,
-        group => $group
+        group => $group,
     }
 
     if ($ensure == 'present')
@@ -114,7 +114,7 @@ define bash::setup (
         file { "${basedir}/${bash::params::dotfilesdir}":
             ensure  => 'link',
             target  => $bash::ref_dotfilesdir,
-            require => Vcsrepo[$bash::ref_dotfilesdir]
+            require => Vcsrepo[$bash::ref_dotfilesdir],
         }
         # Now call the install script
         exec { $install_script:
@@ -123,7 +123,7 @@ define bash::setup (
             cwd     => $basedir,
             onlyif  => "test -x ${install_script}",
             unless  => "test -h ${basedir}/.bashrc",
-            require => File["${basedir}/${bash::params::dotfilesdir}"]
+            require => File["${basedir}/${bash::params::dotfilesdir}"],
         }
     }
     else
@@ -135,12 +135,12 @@ define bash::setup (
             path    => '/usr/bin:/usr/sbin:/bin:/sbin',
             cwd     => $basedir,
             onlyif  => "test -x ${install_script}",
-            require => Vcsrepo[$bash::ref_dotfilesdir]
+            require => Vcsrepo[$bash::ref_dotfilesdir],
         }
 
         file { "${basedir}/${bash::params::dotfilesdir}":
             ensure  => $ensure,
-            require => Exec[$remove_cmd]
+            require => Exec[$remove_cmd],
         }
     }
 
