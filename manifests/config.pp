@@ -111,10 +111,16 @@ define bash::config(
                 '': {
                     crit('No content nor source have been  specified')
                 }
-                default: { $real_source = $source }
+                default: { 
+                    $real_source  = $source 
+                    $real_content = undef
+                }
             }
         }
-        default: { $real_content = $content }
+        default: {
+          $real_content = $content
+          $real_source  = undef
+        }
     }
 
     $dir = $rootdir ? {

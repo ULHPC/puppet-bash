@@ -17,7 +17,7 @@
 # See also https://github.com/garethr/puppet-module-skeleton
 ##############################################################################
 require 'falkorlib'
-require 'puppetlabs_spec_helper/rake_tasks'
+#require 'puppetlabs_spec_helper/rake_tasks'
 
 ## placeholder for custom configuration of FalkorLib.config.*
 ## See https://github.com/Falkor/falkorlib

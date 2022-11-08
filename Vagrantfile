@@ -23,11 +23,10 @@ config_file   = File.join(TOP_VAGRANT_TESTDIR, 'config.yaml')
 # For more information on the below plugins:
 # - https://github.com/oscar-stack/vagrant-hosts
 # - https://github.com/dotless-de/vagrant-vbguest
-# - https://github.com/emyl/vagrant-triggers
 # - https://github.com/fgrehm/vagrant-cachier
 # Terminal-table is a nice ruby gem for automatically print tables with nice layout
 ###
-[ 'vagrant-hosts', 'vagrant-vbguest', 'vagrant-triggers', 'vagrant-cachier', 'terminal-table' ].each do |plugin|
+[ 'vagrant-hosts', 'vagrant-vbguest', 'vagrant-cachier', 'terminal-table' ].each do |plugin|
     abort "Install the  '#{plugin}' plugin with 'vagrant plugin install #{plugin}'" unless Vagrant.has_plugin?("#{plugin}")
 end
 require 'terminal-table'
