@@ -42,20 +42,20 @@ class bash::params {
   # (Modify to adapt to unsupported OSes)
   #######################################
   # bash packages
-  $packagename = $::operatingsystem ? {
+  $packagename = $facts['os']['name'] ? {
     default => 'bash',
   }
-  $extra_packages = $::operatingsystem ? {
+  $extra_packages = $facts['os']['name'] ? {
     #/(?i-mx:ubuntu|debian)/        => [],
     #/(?i-mx:centos|fedora|redhat)/ => [],
     default => [ 'bash-completion' ]
   }
 
   ### Configuration directory & file
-  $ref_dotfilesdir = $::operatingsystem ? {
+  $ref_dotfilesdir = $facts['os']['name'] ? {
     default => '/etc/dotfiles.d'
   }
-  $dotfilesdir = $::operatingsystem ? {
+  $dotfilesdir = $facts['os']['name'] ? {
     default => '.dotfiles.d'
   }
   $local_confdir_before = '.bash.before.d'
@@ -68,42 +68,42 @@ class bash::params {
 
 
   # Configuration directory & file
-  $configdir = $::operatingsystem ? {
+  $configdir = $facts['os']['name'] ? {
     default => '/etc/bashrc.d',
   }
-  $profile_dir = $::operatingsystem ? {
+  $profile_dir = $facts['os']['name'] ? {
     default => '/etc/profile.d',
   }
-  $completion_dir = $::operatingsystem ? {
+  $completion_dir = $facts['os']['name'] ? {
     default => '/etc/bash_completion.d'
   }
-  $skel_dir = $::operatingsystem ? {
+  $skel_dir = $facts['os']['name'] ? {
     default => '/etc/skel'
   }
-  $configdir_mode = $::operatingsystem ? {
+  $configdir_mode = $facts['os']['name'] ? {
     default => '0755',
   }
-  $configdir_owner = $::operatingsystem ? {
+  $configdir_owner = $facts['os']['name'] ? {
     default => 'root',
   }
-  $configdir_group = $::operatingsystem ? {
+  $configdir_group = $facts['os']['name'] ? {
     default => 'root',
   }
 
-  $configfile = $::osfamily ? {
+  $configfile = $facts['os']['family'] ? {
     'Redhat' => '/etc/bashrc',
     default  => '/etc/bash.bashrc'
   }
   # Aliases files -- eventually user defined
   $aliases_file = "${profile_dir}/bash_aliases.sh"
 
-  $configfile_mode = $::operatingsystem ? {
+  $configfile_mode = $facts['os']['name'] ? {
     default => '0644',
   }
-  $configfile_owner = $::operatingsystem ? {
+  $configfile_owner = $facts['os']['name'] ? {
     default => 'root',
   }
-  $configfile_group = $::operatingsystem ? {
+  $configfile_group = $facts['os']['name'] ? {
     default => 'root',
   }
 

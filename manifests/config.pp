@@ -111,8 +111,8 @@ define bash::config(
                 '': {
                     crit('No content nor source have been  specified')
                 }
-                default: { 
-                    $real_source  = $source 
+                default: {
+                    $real_source  = $source
                     $real_content = undef
                 }
             }

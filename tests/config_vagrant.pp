@@ -39,7 +39,7 @@ alias cdv='cd /vagrant'
 export PS1="\u@\h \w>"
 '
     }
-    
+
     bash::config{ 'sysadminrc':
         before_hook => true,
         content     => "
