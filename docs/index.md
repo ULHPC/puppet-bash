@@ -8,7 +8,7 @@
 [![Documentation Status](https://readthedocs.org/projects/ulhpc-puppet-bash/badge/?version=latest)](https://readthedocs.org/projects/ulhpc-puppet-bash/?badge=latest)
 [![By ULHPC](https://img.shields.io/badge/by-ULHPC-blue.svg)](http://hpc.uni.lu)
 
-      Copyright (c) 2019 UL HPC Team <hpc-sysadmins@uni.lu>
+      Copyright (c) 2024 UL HPC Team <hpc-sysadmins@uni.lu>
 
 | [Project Page](https://github.com/ULHPC/puppet-bash) | [Documentation](http://ulhpc-puppet-bash.readthedocs.org/en/latest/) | [Issues](https://github.com/ULHPC/puppet-bash/issues) |
 
