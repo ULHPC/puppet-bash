@@ -62,8 +62,8 @@ inherits bash::params
     }
 
     case $facts['os']['family'] {
-        'Debian': { include ::bash::common::debian }
-        'Redhat': { include ::bash::common::redhat }
+        'Debian': { include bash::common::debian }
+        'Redhat': { include bash::common::redhat }
         default: {
             fail("Module ${module_name} is not supported on ${facts['os']['name']}")
         }

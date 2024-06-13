@@ -77,10 +77,10 @@ define bash::setup (
         fail("bash::setup 'ensure' parameter must be set to either 'absent' or 'present'")
     }
 
-    include ::bash::params
+    include bash::params
 
     if !defined(Class['bash']) {
-        include '::bash'
+        include 'bash'
     }
 
     # Where to install .bashrc etc.

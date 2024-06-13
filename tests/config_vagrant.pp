@@ -30,14 +30,14 @@ node default {
         content => "
 # Local aliases
 alias cdv='cd /vagrant'
-"
+",
     }
 
     bash::config{ 'prompts':
         content => '
 # Local aliases
 export PS1="\u@\h \w>"
-'
+',
     }
 
     bash::config{ 'sysadminrc':
@@ -46,7 +46,7 @@ export PS1="\u@\h \w>"
 # Load .sysadminrc if present
 if [ -f ~/.sysadminrc ]; then 
     . ~/.sysadminrc
-fi"
+fi",
     }
 
 }

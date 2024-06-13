@@ -89,7 +89,7 @@ define bash::config(
     $mode           = '0644'
 )
 {
-    include ::bash::params
+    include bash::params
 
     # $name is provided at define invocation
     $filename = $name

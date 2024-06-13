@@ -23,7 +23,7 @@ node default {
         warn    => true,
         content => '
 # Environment Module Path
-export MODULEPATH="${HOME}/.local/easybuild/modules/all:/opt/apps/easybuild/modules/all:/opt/apps/default/modules/all:${HOME}/privatemodules:${HOME}/easybuild/modules/all"'
+export MODULEPATH="${HOME}/.local/easybuild/modules/all:/opt/apps/easybuild/modules/all:/opt/apps/default/modules/all:${HOME}/privatemodules:${HOME}/easybuild/modules/all"',
     }
 
 
@@ -34,7 +34,7 @@ export MODULEPATH="${HOME}/.local/easybuild/modules/all:/opt/apps/easybuild/modu
 # Load .sysadminrc if present
 if [ -f ~/.sysadminrc ]; then 
     . ~/.sysadminrc
-fi"
+fi",
     }
 
 }

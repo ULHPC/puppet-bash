@@ -13,10 +13,10 @@
 class bash::common {
 
     # Load the variables used in this module. Check the params.pp file
-    require ::bash::params
+    require bash::params
 
     if !defined(Class['profiled']) {
-      include ::profiled
+      include profiled
     }
 
     package { 'bash':
