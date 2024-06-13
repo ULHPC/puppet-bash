@@ -16,7 +16,7 @@ class bash::common {
     require bash::params
 
     if !defined(Class['profiled']) {
-      include ::profiled
+      include profiled
     }
 
     package { 'bash':
@@ -25,14 +25,14 @@ class bash::common {
     }
 
     package { $bash::params::extra_packages:
-        ensure => $bash::ensure
+        ensure => $bash::ensure,
     }
 
     # Our PS1 prompt requires git and subversion, git being ensured through the
     # vcsrepo class call
     if !defined(Package['subversion']) {
         package { 'subversion':
-            ensure => $bash::ensure
+            ensure => $bash::ensure,
         }
     }
 
@@ -76,7 +76,7 @@ class bash::common {
         revision   => $bash::dotfiles_revision,
         user       => $bash::params::configdir_owner,
         group      => $bash::params::configdir_group,
-        submodules => false
+        submodules => false,
     }
 
     # Apply it for root user

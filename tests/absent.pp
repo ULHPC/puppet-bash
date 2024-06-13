@@ -17,6 +17,6 @@
 #
 node default {
     class { 'bash':
-        ensure => 'absent'
+        ensure => 'absent',
     }
 }

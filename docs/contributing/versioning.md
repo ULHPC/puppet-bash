@@ -1,5 +1,5 @@
 The operation consisting of releasing a new version of this repository is
-automated by a set of tasks within the `Rakefile`. 
+automated by a set of tasks within the `Rakefile`.
 
 In this context, a version number have the following format:
 
@@ -13,7 +13,7 @@ where:
 
 Example: `1.2.0`
 
-The current version number is stored in the file `metadata.json`. 
+The current version number is stored in the file `metadata.json`.
 For more information on the version, run:
 
      $> rake version:info
@@ -27,4 +27,4 @@ Then, to make the release effective, just run:
 
      $> rake version:release
 
-This will finalize the release using `git-flow`, create the appropriate tag and merge all things the way they should be. 
+This will finalize the release using `git-flow`, create the appropriate tag and merge all things the way they should be.

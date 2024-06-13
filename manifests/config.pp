@@ -111,10 +111,16 @@ define bash::config(
                 '': {
                     crit('No content nor source have been  specified')
                 }
-                default: { $real_source = $source }
+                default: {
+                    $real_source  = $source
+                    $real_content = undef
+                }
             }
         }
-        default: { $real_content = $content }
+        default: {
+          $real_content = $content
+          $real_source  = undef
+        }
     }
 
     $dir = $rootdir ? {
@@ -135,7 +141,7 @@ define bash::config(
             force  => true,
             owner  => $owner,
             group  => $group,
-            mode   => $bash::params::configdir_mode
+            mode   => $bash::params::configdir_mode,
         }
     }
     $path = "${dir}/${filename}.bash"
@@ -146,7 +152,7 @@ define bash::config(
         owner          => $owner,
         group          => $group,
         ensure_newline => true,
-        require        => File[$dir]
+        require        => File[$dir],
     }
 
     concat::fragment  { $path:

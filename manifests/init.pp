@@ -61,11 +61,11 @@ inherits bash::params
         fail("bash 'ensure' parameter must be set to either 'absent' or 'present'")
     }
 
-    case $::osfamily {
+    case $facts['os']['family'] {
         'Debian': { include bash::common::debian }
         'Redhat': { include bash::common::redhat }
         default: {
-            fail("Module ${module_name} is not supported on ${::operatingsystem}")
+            fail("Module ${module_name} is not supported on ${facts['os']['name']}")
         }
     }
 }

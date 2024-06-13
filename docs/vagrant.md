@@ -4,46 +4,66 @@
 
 The best way to test this module in a non-intrusive way is to rely on [Vagrant](http://www.vagrantup.com/).
 [Vagrant](http://vagrantup.com/) uses [Oracle's VirtualBox](http://www.virtualbox.org/)
-to build configurable, lightweight, and portable virtual machines dynamically. 
+to build configurable, lightweight, and portable virtual machines dynamically.
 
 * [Reference installation notes](http://docs.vagrantup.com/v2/installation/) -- assuming you have installed [Oracle's VirtualBox](http://www.virtualbox.org/)
 * [installation notes on Mac OS](http://sourabhbajaj.com/mac-setup/Vagrant/README.html) using [Homebrew](http://brew.sh/) and [Cask](http://sourabhbajaj.com/mac-setup/Homebrew/Cask.html)
 
-The `Vagrantfile` at the root of the repository pilot the provisioning of many vagrant boxes generated through the [vagrant-vms](https://github.com/falkor/vagrant-vms) repository and available on [Vagrant cloud](https://atlas.hashicorp.com/boxes/search?utf8=%E2%9C%93&sort=&provider=virtualbox&q=svarrette).
+The `Vagrantfile` at the root of the repository pilot the provisioning a vagrant boxes.
+It can run any OS you set in `tests/vagrant/config.yaml` as follows:
+
+```yaml
+:vms:
+  'default':
+    :os: :debian8
+```
 
 You can list the available vagrant box as follows:
 
-       $> vagrant status 
-	   Current machine states:
+```bash
+$> vagrant status
+Current machine states:
 
-       centos-7                  not created (virtualbox)
-	   debian-7                  not created (virtualbox)
+centos-7                  running (virtualbox)
 
-       This environment represents multiple VMs. The VMs are all listed
-	   above with their current state. For more information about a specific
-	   VM, run `vagrant status NAME`.
+The VM is running. To stop this VM, you can run `vagrant halt` to
+shut it down forcefully, or you can run `vagrant suspend` to simply
+suspend the virtual machine. In either case, to restart it again,
+simply run `vagrant up`.
+```
 
-As suggested, you can run a debian 7 machine for instance by issuing: 
+You can boot the VM and provision it (using the scripts under `tests/vagrant/`) by running:
 
-      $> vagrant up debian-7
+```bash
+$> vagrant up
+```
 
 Then you can ssh into the machine afterwards:
 
-      $> vagrant ssh debian-7
+```bash
+$> vagrant ssh
+```
 
-When you run `vagrant up <os>` to boot the VM, it is configured to be provisioned with the `.vagrant_init.rb` script.
+When you run `vagrant up <name>` to boot the VM, the provisioning scripts are responsible for:
+
+| Script                    | Description                                     |
+|---------------------------|-------------------------------------------------|
+| `bootstrap.sh`            | Install puppet 4 and defaults packages and gems |
+| `puppet_modules_setup.rb` | pre-install the necessary puppet modules        |
+
+More precisely, the `tests/vagrant/puppet_modules_setup.rb` script.
 This script is responsible for two main tasks:
 
 1. pre-install the puppet modules listed as dependencies in `metadata.json`
-2. make the appropriate symbolic link in the puppet module directory (to `/vagrant`) to ensure you can directly make changes and correct your own module transparently within the box. 
+2. make the appropriate symbolic link in the puppet module directory (to `/vagrant`) to ensure you can directly make changes and correct your own module transparently within the box.
 
 So you can test the manifests of the `tests/` directory within the VM:
 
-      $> vagrant ssh <os>
+      $> vagrant ssh [<os>]
       [...]
       (vagrant)$> sudo puppet apply -t /vagrant/tests/init.pp
 
-From now on, you can test (with --noop) the other manifests. 
+From now on, you can test (with --noop) the other manifests.
 
 Run `vagrant halt` (or `vagrant destroy`) to stop (or kill) the VM once you've finished to play with it.
 
