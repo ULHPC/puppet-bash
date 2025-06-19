@@ -9,7 +9,6 @@
 # Base class to be inherited by the other bash classes, containing the common code.
 #
 # Note: respect the Naming standard provided here[http://projects.puppetlabs.com/projects/puppet/wiki/Module_Standards]
-
 class bash::common {
 
     # Load the variables used in this module. Check the params.pp file
