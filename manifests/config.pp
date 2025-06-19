@@ -109,7 +109,7 @@ define bash::config(
         '': {
             case $source {
                 '': {
-                    crit('No content nor source have been  specified')
+                    crit('No content nor source have been specified')
                 }
                 default: {
                     $real_source  = $source
@@ -155,10 +155,15 @@ define bash::config(
         require        => File[$dir],
     }
 
-    concat::fragment  { $path:
-        target  => $path,
-        content => $real_content,
-        source  => $real_source,
+    if $real_content {
+        concat::fragment { $path:
+            target  => $path,
+            content => $real_content,
+        }
+    } elsif $real_source {
+        concat::fragment { $path:
+            target => $path,
+            source => $real_source,
+        }
     }
-
 }
