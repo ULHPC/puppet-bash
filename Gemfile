@@ -1,17 +1,13 @@
 # A sample Gemfile
 source "https://rubygems.org"
 
-gem 'falkorlib' #, :path => '~/git/github.com/Falkor/falkorlib'
+gem 'falkorlib', git: 'https://github.com/Falkor/falkorlib.git', ref: 'ed25efb'
 
-# Puppet stuff
-#gem 'puppetlabs_spec_helper', '>= 0.1.0'
-
-#gem 'puppet-syntax'
-#gem 'facter',                 '>= 1.7.0'
+gem 'puppet-syntax'
 
 group :test do
   gem "rake"
-  gem "puppet", ENV['PUPPET_GEM_VERSION'] || '~> 4.4.0'
+  gem "puppet", ENV['PUPPET_GEM_VERSION'] || '~> 7'
   gem "rspec", '< 3.2.0'
   gem "rspec-puppet"
   gem "puppetlabs_spec_helper"
@@ -34,15 +30,8 @@ group :test do
   gem 'json_pure', '<= 2.0.1' if RUBY_VERSION < '2.0.0'
 end
 
-group :development do
-  gem "travis"              if RUBY_VERSION >= '2.1.0'
-  gem "travis-lint"         if RUBY_VERSION >= '2.1.0'
- # gem "puppet-blacksmith"
- # gem "guard-rake"          if RUBY_VERSION >= '2.2.5' # per dependency https://rubygems.org/gems/ruby_dep
-end
-
 group :system_tests do
-  gem "beaker"
+  gem "beaker", '~> 6.1.0'
   gem "beaker-rspec"
   gem "beaker-puppet_install_helper"
 end
