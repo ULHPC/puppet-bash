@@ -3,11 +3,12 @@ source "https://rubygems.org"
 
 gem 'falkorlib', git: 'https://github.com/Falkor/falkorlib.git', ref: 'ed25efb'
 
-gem 'puppet-syntax'
+gem 'puppet-syntax', '< 6.0.0'
 
 group :test do
   gem "rake"
   gem "puppet", ENV['PUPPET_GEM_VERSION'] || '~> 7'
+  gem "pdk"
   gem "rspec", '< 3.2.0'
   gem "rspec-puppet"
   gem "puppetlabs_spec_helper"
