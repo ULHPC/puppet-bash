@@ -5,14 +5,13 @@
 [![Puppet Forge](http://img.shields.io/puppetforge/v/ULHPC/bash.svg)](https://forge.puppetlabs.com/ULHPC/bash)
 [![License](http://img.shields.io/:license-Apache2.0-blue.svg)](LICENSE)
 ![Supported Platforms](http://img.shields.io/badge/platform-debian|redhat|centos-lightgrey.svg)
-[![Documentation Status](https://readthedocs.org/projects/ulhpc-puppet-bash/badge/?version=latest)](https://readthedocs.org/projects/ulhpc-puppet-bash/?badge=latest)
 
 Configure and manage Bourne Again SHell (Bash) dotfiles and profiles
 
       Copyright (c) 2019 UL HPC Team <hpc-sysadmins@uni.lu>
-      
 
-| [Project Page](https://github.com/ULHPC/puppet-bash) | [Sources](https://github.com/ULHPC/puppet-bash) | [Documentation](https://ulhpc-puppet-bash.readthedocs.org/en/latest/) | [Issues](https://github.com/ULHPC/puppet-bash/issues) |
+
+| [Project Page](https://github.com/ULHPC/puppet-bash) | [Sources](https://github.com/ULHPC/puppet-bash) | [Issues](https://github.com/ULHPC/puppet-bash/issues) |
 
 ## Synopsis
 
@@ -169,12 +168,6 @@ The best way to test this module in a non-intrusive way is to rely on [Vagrant](
 The `Vagrantfile` at the root of the repository pilot the provisioning various vagrant boxes available on [Vagrant cloud](https://atlas.hashicorp.com/boxes/search?utf8=%E2%9C%93&sort=&provider=virtualbox&q=svarrette) you can use to test this module.
 
 See [`docs/vagrant.md`](vagrant.md) for more details.
-
-## Online Documentation
-
-[Read the Docs](https://readthedocs.org/) aka RTFD hosts documentation for the open source community and the [ULHPC/bash](https://github.com/ULHPC/puppet-bash) puppet module has its documentation (see the `docs/` directly) hosted on [readthedocs](http://ulhpc-puppet-bash.rtfd.org).
-
-See [`docs/rtfd.md`](rtfd.md) for more details.
 
 ## Licence
 
