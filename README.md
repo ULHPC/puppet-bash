@@ -44,7 +44,6 @@ See [`metadata.json`](metadata.json). In particular, this module depends on
 * [puppetlabs/stdlib](https://forge.puppetlabs.com/puppetlabs/stdlib)
 * [puppetlabs/vcsrepo](https://forge.puppetlabs.com/puppetlabs/vcsrepo)
 * [puppetlabs/concat](https://forge.puppetlabs.com/puppetlabs/concat)
-* [unibet/profiled](https://forge.puppetlabs.com/unibet/profiled)
 
 ## Overview and Usage
 
