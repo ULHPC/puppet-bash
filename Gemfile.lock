@@ -98,7 +98,7 @@ GEM
     in-parallel (1.0.1)
     inifile (3.0.0)
     jgrep (1.5.4)
-    json (2.18.1)
+    json (2.19.2)
     json-schema (5.2.1)
       addressable (~> 2.8)
       bigdecimal (~> 3.1)
