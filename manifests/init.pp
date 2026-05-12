@@ -45,30 +45,26 @@
 #
 # [Remember: No empty lines between comments and class definition]
 #
-class bash(
-    $aliases            = $bash::params::aliases,
-    $aliases_file       = $bash::params::aliases_file,
-    $ensure             = $bash::params::ensure,
-    $dotfiles_provider  = $bash::params::dotfiles_provider,
-    $dotfiles_src       = $bash::params::dotfiles_src,
-    $dotfiles_revision  = $bash::params::dotfiles_revision
+class bash (
+  $aliases            = $bash::params::aliases,
+  $aliases_file       = $bash::params::aliases_file,
+  $ensure             = $bash::params::ensure,
+  $dotfiles_provider  = $bash::params::dotfiles_provider,
+  $dotfiles_src       = $bash::params::dotfiles_src,
+  $dotfiles_revision  = $bash::params::dotfiles_revision
 )
-inherits bash::params
-{
-    info ("Configuring bash (with ensure = ${ensure})")
+inherits bash::params {
+  info ("Configuring bash (with ensure = ${ensure})")
 
-    if ! ($ensure in [ 'present', 'absent' ]) {
-        fail("bash 'ensure' parameter must be set to either 'absent' or 'present'")
-    }
+  if ! ($ensure in ['present', 'absent']) {
+    fail("bash 'ensure' parameter must be set to either 'absent' or 'present'")
+  }
 
-    case $facts['os']['family'] {
-        'Debian': { include bash::common::debian }
-        'Redhat': { include bash::common::redhat }
-        default: {
-            fail("Module ${module_name} is not supported on ${facts['os']['name']}")
-        }
+  case $facts['os']['family'] {
+    'Debian': { include bash::common::debian }
+    'Redhat': { include bash::common::redhat }
+    default: {
+      fail("Module ${module_name} is not supported on ${facts['os']['name']}")
     }
+  }
 }
-
-
-

@@ -77,93 +77,92 @@
 #
 #    [Remember: No empty lines between comments and class definition]
 #
-define bash::config(
-    $ensure         = 'present',
-    $content        = '',
-    $source         = '',
-    $rootdir        = '',
-    $before_hook    = false,
-    $warn           = false,
-    $owner          = 'root',
-    $group          = 'root',
-    $mode           = '0644'
-)
-{
-    include bash::params
+define bash::config (
+  $ensure         = 'present',
+  $content        = '',
+  $source         = '',
+  $rootdir        = '',
+  $before_hook    = false,
+  $warn           = false,
+  $owner          = 'root',
+  $group          = 'root',
+  $mode           = '0644'
+) {
+  include bash::params
 
-    # $name is provided at define invocation
-    $filename = $name
+  # $name is provided at define invocation
+  $filename = $name
 
-    if ! ($ensure in [ 'present', 'absent' ]) {
-        fail("bash::local::before 'ensure' parameter must be set to either 'absent' or 'present'")
+  if ! ($ensure in ['present', 'absent']) {
+    fail("bash::local::before 'ensure' parameter must be set to either 'absent' or 'present'")
+  }
+
+  if ($bash::ensure != $ensure) {
+    if ($bash::ensure != 'present') {
+      fail("Cannot configure a bash::config '${filename}' as bash::ensure is NOT set to present (but ${bash::ensure})")
     }
+  }
 
-    if ($bash::ensure != $ensure) {
-        if ($bash::ensure != 'present') {
-            fail("Cannot configure a bash::config '${filename}' as bash::ensure is NOT set to present (but ${bash::ensure})")
-        }
-    }
-
-    # if content is passed, use that, else if source is passed use that
-    case $content {
+  # if content is passed, use that, else if source is passed use that
+  case $content {
+    '': {
+      case $source {
         '': {
-            case $source {
-                '': {
-                    crit('No content nor source have been specified')
-                }
-                default: {
-                    $real_source  = $source
-                    $real_content = undef
-                }
-            }
+          crit('No content nor source have been specified')
         }
         default: {
-          $real_content = $content
-          $real_source  = undef
+          $real_source  = $source
+          $real_content = undef
         }
+      }
     }
+    default: {
+      $real_content = $content
+      $real_source  = undef
+    }
+  }
 
-    $dir = $rootdir ? {
-        ''      => "${bash::params::profile_dir}/",
-        default => $before_hook ? {
-            true    => "${rootdir}/${bash::params::local_confdir_before}/",
-            default => "${rootdir}/${bash::params::local_confdir}/"
-        }
+  $dir = $rootdir ? {
+    ''      => "${bash::params::profile_dir}/",
+    default => $before_hook ? {
+      true    => "${rootdir}/${bash::params::local_confdir_before}/",
+      default => "${rootdir}/${bash::params::local_confdir}/"
     }
+  }
 
-    if (! defined(File[$dir])) {
-        $dir_ensure = $ensure ? {
-            'present' => 'directory',
-            default   => $ensure
-        }
-        file { $dir:
-            ensure => $dir_ensure,
-            force  => true,
-            owner  => $owner,
-            group  => $group,
-            mode   => $bash::params::configdir_mode,
-        }
+  if (! defined(File[$dir])) {
+    $dir_ensure = $ensure ? {
+      'present' => 'directory',
+      default   => $ensure
     }
-    $path = "${dir}/${filename}.bash"
+    file { $dir:
+      ensure => $dir_ensure,
+      force  => true,
+      owner  => $owner,
+      group  => $group,
+      mode   => $bash::params::configdir_mode,
+    }
+  }
+  $path = "${dir}/${filename}.bash"
 
-    concat { $path:
-        ensure         => $ensure,
-        warn           => $warn,
-        owner          => $owner,
-        group          => $group,
-        ensure_newline => true,
-        require        => File[$dir],
-    }
+  concat { $path:
+    ensure         => $ensure,
+    warn           => $warn,
+    owner          => $owner,
+    group          => $group,
+    ensure_newline => true,
+    require        => File[$dir],
+  }
 
-    if $real_content {
-        concat::fragment { $path:
-            target  => $path,
-            content => $real_content,
-        }
-    } elsif $real_source {
-        concat::fragment { $path:
-            target => $path,
-            source => $real_source,
-        }
+  if $real_content {
+    concat::fragment { $path:
+      target  => $path,
+      content => $real_content,
     }
+  } elsif $real_source {
+    concat::fragment { $path:
+      target => $path,
+      source => $real_source,
+    }
+  }
 }

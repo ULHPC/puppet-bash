@@ -16,7 +16,7 @@ Configure and manage Bourne Again SHell (Bash) dotfiles and profiles
 ## Synopsis
 
 Configure and manage Bourne Again SHell (Bash) dotfiles and profile.
- Bourne Again SHell (Bash) is the GNU Project's shell. Bash is an sh-compatible shell that incorporates useful features from the Korn shell (ksh) and C shell (csh). It is intended to conform to the IEEE POSIX P1003.2/ISO 9945.2 Shell and Tools standard. It offers functional improvements over sh for both programming and interactive use. In addition, most sh scripts can be run by Bash without modification..
+ Bourne Again SHell (Bash) is the GNU Project's shell. Bash is an sh-compatible shell that incorporates useful features from the Korn shell (ksh) and C shell (csh). It is intended to conform to the IEEE POSIX P1003.2/ISO 9945.2 Shell and Tools standard. It offers functional improvements over sh for both programming and interactive use. In addition, most sh scripts can be run by Bash without modification.
 
 This module implements the following elements:
 

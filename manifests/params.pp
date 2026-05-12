@@ -23,7 +23,6 @@
 # [Remember: No empty lines between comments and class definition]
 #
 class bash::params {
-
   ######## DEFAULTS FOR VARIABLES USERS CAN SET ##########################
   # (Here are set the defaults, provide your custom variables externally)
   # (The default used is in the line with '')
@@ -37,7 +36,6 @@ class bash::params {
   $dotfiles_src      = 'https://github.com/ULHPC/dotfiles.git'
   $dotfiles_revision = 'master'
 
-
   #### MODULE INTERNAL VARIABLES  #########
   # (Modify to adapt to unsupported OSes)
   #######################################
@@ -48,7 +46,7 @@ class bash::params {
   $extra_packages = $facts['os']['name'] ? {
     #/(?i-mx:ubuntu|debian)/        => [],
     #/(?i-mx:centos|fedora|redhat)/ => [],
-    default => [ 'bash-completion' ]
+    default => ['bash-completion']
   }
 
   ### Configuration directory & file
@@ -65,7 +63,6 @@ class bash::params {
   # $bash_completion_giturl  = "https://github.com/GArik/bash-completion.git"
   # $bash_completion_src_url = "http://bash-completion.alioth.debian.org/files/bash-completion-2.0.tar.gz"
   # $bash_completion_src_version = "2.0"
-
 
   # Configuration directory & file
   $configdir = $facts['os']['name'] ? {
@@ -105,7 +102,4 @@ class bash::params {
   }
   $configfile_group = $facts['os']['name'] ? {
     default => 'root',
-  }
-
-
-}
+} }
