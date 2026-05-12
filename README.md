@@ -88,13 +88,11 @@ Example:
 
       include bash
 
-      bash::setup{ '/home/vagrant':
+      bash::setup{ '/home/ulhpc':
           ensure => 'present',
-          user   => 'vagrant',
-          group  => 'vagrant',
+          user   => 'ulhpc',
+          group  => 'ulhpc',
       }
-
-See also [`tests/vagrant_setup.pp`](tests/vagrant_setup.pp) or [`tests/vagrant_setup_absent.pp`](tests/vagrant_setup_absent.pp)
 
 ### Definition `bash::config`
 
@@ -133,7 +131,7 @@ Example:
 	  export MODULEPATH='$HOME/.local/easybuild/modules/all:/opt/apps/easybuild/modules/all:/opt/apps/default/modules/all:$HOME/privatemodules:$HOME/easybuild/modules/all'"
       }
 
-See also [`tests/config.pp`](tests/config.pp) or [`tests/config_vagrant.pp`](tests/config_vagrant.pp)
+See also [`tests/config.pp`](tests/config.pp)
 
 
 ## Librarian-Puppet / R10K Setup
@@ -160,13 +158,6 @@ If you want to contribute to the code, you shall be aware of the way this module
 These elements are detailed on [`docs/contributing.md`](contributing/index.md).
 
 You are more than welcome to contribute to its development by [sending a pull request](https://help.github.com/articles/using-pull-requests).
-
-## Puppet modules tests within a Vagrant box
-
-The best way to test this module in a non-intrusive way is to rely on [Vagrant](http://www.vagrantup.com/).
-The `Vagrantfile` at the root of the repository pilot the provisioning various vagrant boxes available on [Vagrant cloud](https://atlas.hashicorp.com/boxes/search?utf8=%E2%9C%93&sort=&provider=virtualbox&q=svarrette) you can use to test this module.
-
-See [`docs/vagrant.md`](vagrant.md) for more details.
 
 ## Licence
 
