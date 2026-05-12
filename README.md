@@ -1,5 +1,3 @@
--*- mode: markdown; mode: visual-line;  -*-
-
 # Bash Puppet Module
 
 [![Puppet Forge](http://img.shields.io/puppetforge/v/ULHPC/bash.svg)](https://forge.puppetlabs.com/ULHPC/bash)
@@ -8,7 +6,7 @@
 
 Configure and manage Bourne Again SHell (Bash) dotfiles and profiles
 
-      Copyright (c) 2019 UL HPC Team <hpc-sysadmins@uni.lu>
+      Copyright (c) 2026 UL HPC Team <hpc-sysadmins@uni.lu>
 
 
 | [Project Page](https://github.com/ULHPC/puppet-bash) | [Sources](https://github.com/ULHPC/puppet-bash) | [Issues](https://github.com/ULHPC/puppet-bash/issues) |
@@ -33,9 +31,6 @@ This module implements the following elements:
 
 All these components are configured through a set of variables you will find in
 [`manifests/params.pp`](manifests/params.pp).
-
-_Note_: the various operations that can be conducted from this repository are piloted from a [`Rakefile`](https://github.com/ruby/rake) and assumes you have a running [Ruby](https://www.ruby-lang.org/en/) installation.
-See `docs/contributing.md` for more details on the steps you shall follow to have this `Rakefile` working properly.
 
 ## Dependencies
 
@@ -146,17 +141,14 @@ or, if you prefer to work on the git version:
 
      mod "ULHPC/bash",
          :git => 'https://github.com/ULHPC/puppet-bash',
-         :ref => 'production'
+         :ref => 'main'
 
-## Issues / Feature request
+## Developments / Issues / Contributing to the code
 
-You can submit bug / issues / feature request using the [ULHPC/bash Puppet Module Tracker](https://github.com/ULHPC/puppet-bash/issues).
+This Puppet Module has been implemented in the context of the [UL HPC](http://hpc.uni.lu) Platform of the [University of Luxembourg](http://www.uni.lu).
+It relies on [Vox Pupuli modulesync](https://github.com/voxpupuli/modulesync) for its organization.
 
-## Developments / Contributing to the code
-
-If you want to contribute to the code, you shall be aware of the way this module is organized.
-These elements are detailed on [`docs/contributing.md`](contributing/index.md).
-
+You can submit bugs / issues / feature requests using the [ULHPC/bash Puppet Module Tracker](https://github.com/ULHPC/puppet-bash/issues).
 You are more than welcome to contribute to its development by [sending a pull request](https://help.github.com/articles/using-pull-requests).
 
 ## Licence
