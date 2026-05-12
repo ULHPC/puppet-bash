@@ -21,7 +21,6 @@ It proposes to detail the following elements:
 
 * An [Overview](overview.md) of the module is proposed, describing the puppet classes and/or definitions it implements.
      - you might also wish to check the `tests/` directory for sample test cases
-* How to [test this module with Vagrant](vagrant.md)
 * How to [contribute](contributing/index.md) to this puppet module development. In particular, we detail:
      - the [directory tree structure](contributing/layout.md)
 	 - the steps to follow to [setup this repository](contributing/setup.md)
