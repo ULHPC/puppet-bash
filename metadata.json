@@ -2,15 +2,11 @@
   "name": "ULHPC-bash",
   "version": "0.8.0",
   "author": "UL HPC Team",
-  "mail": "hpc-sysadmins@uni.lu",
   "summary": "Configure and manage Bourne Again SHell (Bash) dotfiles and profiles",
-  "description": "Configure and manage Bourne Again SHell (Bash) dotfiles and profile.\r\n Bourne Again SHell (Bash) is the GNU Project's shell. Bash is an sh-compatible shell that incorporates useful features from the Korn shell (ksh) and C shell (csh). It is intended to conform to the IEEE POSIX P1003.2/ISO 9945.2 Shell and Tools standard. It offers functional improvements over sh for both programming and interactive use. In addition, most sh scripts can be run by Bash without modification.",
   "license": "Apache-2.0",
   "source": "https://github.com/ULHPC/puppet-bash",
-  "docs_project": "ulhpc-puppet-bash",
   "project_page": "https://github.com/ULHPC/puppet-bash",
   "issues_url": "https://github.com/ULHPC/puppet-bash/issues",
-  "forge_url": "https://forge.puppetlabs.com/ULHPC/bash",
   "dependencies": [
     {
       "name": "puppetlabs-stdlib",
@@ -29,49 +25,48 @@
     {
       "operatingsystem": "Debian",
       "operatingsystemrelease": [
-        "6",
-        "7"
+        "11",
+        "12",
+        "13"
       ]
     },
     {
       "operatingsystem": "RedHat",
       "operatingsystemrelease": [
-        "6",
         "7",
         "8",
-        "9"
+        "9",
+        "10"
       ]
     },
     {
       "operatingsystem": "CentOS",
       "operatingsystemrelease": [
-        "6",
         "7",
-        "8"
+        "8",
+        "9",
+        "10"
       ]
     },
     {
       "operatingsystem": "Rocky",
       "operatingsystemrelease": [
         "8",
-        "9"
+        "9",
+        "10"
       ]
+    }
+  ],
+  "requirements": [
+    {
+      "name": "puppet",
+      "version_requirement": ">= 8.0.0 < 9.0.0"
     }
   ],
   "tags": [
     "shell",
     "gnu",
     "bash"
-  ],
-  "classes": [
-    "bash",
-    "bash::common",
-    "bash::common::debian",
-    "bash::common::redhat",
-    "bash::params"
-  ],
-  "definitions": [
-    "bash::config",
-    "bash::setup"
   ]
 }
+

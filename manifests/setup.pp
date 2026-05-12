@@ -67,82 +67,75 @@
 # [Remember: No empty lines between comments and class definition]
 #
 define bash::setup (
-    $path   = '',
-    $ensure = 'present',
-    $user   = 'root',
-    $group  = 'root'
-)
-{
-    if ! ($ensure in [ 'present', 'absent' ]) {
-        fail("bash::setup 'ensure' parameter must be set to either 'absent' or 'present'")
+  $path   = '',
+  $ensure = 'present',
+  $user   = 'root',
+  $group  = 'root'
+) {
+  if ! ($ensure in ['present', 'absent']) {
+    fail("bash::setup 'ensure' parameter must be set to either 'absent' or 'present'")
+  }
+
+  include bash::params
+
+  if !defined(Class['bash']) {
+    include 'bash'
+  }
+
+  # Where to install .bashrc etc.
+  $basedir = $path ? {
+    ''      => $name,
+    default => $path
+  }
+
+  if ($basedir == '') {
+    fail('Unable to run bash::setup in an empty directory')
+  }
+
+  # Let's go
+  info("Running ${module_name}::setup in ${basedir} for user ${user} (with ensure = ${ensure})")
+  $install_script = "${basedir}/${bash::params::dotfilesdir}/install.sh"
+  $install_script_options = '--offline --bash --screen'
+
+  # Set File / Exec resource defaults
+  File {
+    owner  => $user,
+    group  => $group,
+  }
+  Exec {
+    user  => $user,
+    group => $group,
+  }
+
+  if ($ensure == 'present') {
+    file { "${basedir}/${bash::params::dotfilesdir}":
+      ensure  => 'link',
+      target  => $bash::ref_dotfilesdir,
+      require => Vcsrepo[$bash::ref_dotfilesdir],
+    }
+    # Now call the install script
+    exec { $install_script:
+      path    => '/usr/bin:/usr/sbin:/bin:/sbin',
+      command => "${install_script} --dir '${basedir}/${bash::params::dotfilesdir}' ${install_script_options}",
+      cwd     => $basedir,
+      onlyif  => "test -x ${install_script}",
+      unless  => "test -h ${basedir}/.bashrc",
+      require => File["${basedir}/${bash::params::dotfilesdir}"],
+    }
+  }
+  else {
+    $remove_cmd = "${install_script} --delete --dir '${basedir}/${bash::params::dotfilesdir}' ${install_script_options}"
+
+    # Now call the install script
+    exec { $remove_cmd:
+      path    => '/usr/bin:/usr/sbin:/bin:/sbin',
+      cwd     => $basedir,
+      onlyif  => "test -x ${install_script}",
+      require => Vcsrepo[$bash::ref_dotfilesdir],
     }
 
-    include bash::params
-
-    if !defined(Class['bash']) {
-        include 'bash'
+    file { "${basedir}/${bash::params::dotfilesdir}":
+      ensure  => $ensure,
+      require => Exec[$remove_cmd],
     }
-
-    # Where to install .bashrc etc.
-    $basedir = $path ? {
-        ''      => $name,
-        default => $path
-    }
-
-    if ($basedir == '') {
-        fail('Unable to run bash::setup in an empty directory')
-    }
-
-    # Let's go
-    info("Running ${module_name}::setup in ${basedir} for user ${user} (with ensure = ${ensure})")
-    $install_script = "${basedir}/${bash::params::dotfilesdir}/install.sh"
-    $install_script_options = '--offline --bash --screen'
-
-    # Set File / Exec resource defaults
-    File {
-        owner  => $user,
-        group  => $group,
-    }
-    Exec {
-        user  => $user,
-        group => $group,
-    }
-
-    if ($ensure == 'present')
-    {
-
-        file { "${basedir}/${bash::params::dotfilesdir}":
-            ensure  => 'link',
-            target  => $bash::ref_dotfilesdir,
-            require => Vcsrepo[$bash::ref_dotfilesdir],
-        }
-        # Now call the install script
-        exec { $install_script:
-            path    => '/usr/bin:/usr/sbin:/bin:/sbin',
-            command => "${install_script} --dir '${basedir}/${bash::params::dotfilesdir}' ${install_script_options}",
-            cwd     => $basedir,
-            onlyif  => "test -x ${install_script}",
-            unless  => "test -h ${basedir}/.bashrc",
-            require => File["${basedir}/${bash::params::dotfilesdir}"],
-        }
-    }
-    else
-    {
-        $remove_cmd = "${install_script} --delete --dir '${basedir}/${bash::params::dotfilesdir}' ${install_script_options}"
-
-        # Now call the install script
-        exec { $remove_cmd:
-            path    => '/usr/bin:/usr/sbin:/bin:/sbin',
-            cwd     => $basedir,
-            onlyif  => "test -x ${install_script}",
-            require => Vcsrepo[$bash::ref_dotfilesdir],
-        }
-
-        file { "${basedir}/${bash::params::dotfilesdir}":
-            ensure  => $ensure,
-            require => Exec[$remove_cmd],
-        }
-    }
-
-
-}
+} }
