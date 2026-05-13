@@ -62,9 +62,6 @@ Use it as follows:
 
      include ' bash'
 
-See also [`tests/init.pp`](tests/init.pp)
-
-
 ### Definition `bash::setup`
 
 The definition `bash::setup` configures `.bashrc` and many other dotfiles (`.inputrc`, `.vimrc`, [`.screenrc`](https://www.gnu.org/software/screen/manual/html_node/Startup-Files.html), bash aliases etc. ) for a given user within a given home directory (hopefully **his** home directory) using specific configuration (see <https://github.com/ULHPC/dotfiles>).
@@ -125,9 +122,6 @@ Example:
          content => "# Environment Module Path
 	  export MODULEPATH='$HOME/.local/easybuild/modules/all:/opt/apps/easybuild/modules/all:/opt/apps/default/modules/all:$HOME/privatemodules:$HOME/easybuild/modules/all'"
       }
-
-See also [`tests/config.pp`](tests/config.pp)
-
 
 ## Librarian-Puppet / R10K Setup
 
